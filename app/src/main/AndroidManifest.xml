@@ -16,10 +16,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".views.TutorialsActivity" />
-        <activity android:name=".views.StudentsActivity"
-            android:label="Student List"/>
-        <activity android:name=".views.StudentProfile"
-            android:label="Student Profile"></activity>
+        <activity
+            android:name=".views.StudentsActivity"
+            android:label="Student List" />
+        <activity
+            android:name=".views.StudentProfile"
+            android:label="Student Profile" />
+        <activity android:name=".views.NewTutorial"></activity>
     </application>
 
 </manifest>

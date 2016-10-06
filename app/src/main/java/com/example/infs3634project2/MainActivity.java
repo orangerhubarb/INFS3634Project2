@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.infs3634project2.views.NewTutorial;
 import com.example.infs3634project2.views.TutorialsActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent showClasses = new Intent(MainActivity.this, TutorialsActivity.class);
+                Intent showClasses = new Intent(MainActivity.this, NewTutorial.class);
                 startActivity(showClasses);
             }
         });
