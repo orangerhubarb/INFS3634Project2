@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Tutorial;
@@ -13,19 +14,23 @@ import com.example.infs3634project2.storage.TutorialsContract;
 
 public class NewTutorial extends AppCompatActivity {
 
-    private Button addButton;
+    //Need validation checks, so how do we stop people from entering in dodgy course codes or multiple lines of codes
+
+    private Button addTutorialButton;
+    private EditText tutorialName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_tutorial);
 
-        addButton = (Button) findViewById(R.id.addButton);
+        addTutorialButton = (Button) findViewById(R.id.addTutorialButton);
+        tutorialName = (EditText) findViewById(R.id.tutorialNameEditText);
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        addTutorialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Tutorial tutorial = new Tutorial("INFS0000");
+                Tutorial tutorial = new Tutorial(tutorialName.getText().toString());
 
                 DBOpenHelper helper = new DBOpenHelper(NewTutorial.this);
                 TutorialsContract tutorialsContract = new TutorialsContract(helper);

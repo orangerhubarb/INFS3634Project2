@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent showClasses = new Intent(MainActivity.this, NewTutorial.class);
+                Intent showClasses = new Intent(MainActivity.this, TutorialsActivity.class);
                 startActivity(showClasses);
             }
         });
