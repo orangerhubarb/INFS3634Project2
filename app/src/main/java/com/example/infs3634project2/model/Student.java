@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Davian on 6/10/16.
  */
 public class Student implements Serializable {
-    private int id;
+    private int tutorialID;
     private String firstName;
     private String lastName;
 
@@ -14,11 +14,15 @@ public class Student implements Serializable {
 
     }
 
-    public Student(String firstName, String lastName, int id) {
+    public Student(String firstName, String lastName, int tutorialID) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = id;
+        this.tutorialID = tutorialID;
     }
+
+    public int getTutorialID() { return tutorialID; };
+
+    public void setTutorialID(int tutorialID) { this.tutorialID = tutorialID; }
 
     public String getFirstName() {
         return firstName;
@@ -36,11 +40,5 @@ public class Student implements Serializable {
         this.lastName = lastName;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 }

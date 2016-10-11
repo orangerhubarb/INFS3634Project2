@@ -18,11 +18,11 @@
     android:hint="Tutorial Name"
     android:maxLines="1"
     android:maxLength="8"/>
-2
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addTutorialButton"
+        android:id="@+id/confirmTutorialAddButton"
         android:text="Add new Tutorial"
         android:layout_below="@+id/tutorialNameEditText"/>
 

@@ -79,10 +79,6 @@ import java.util.ArrayList;
                 Context context = v.getContext();
                 Intent showProfile = new Intent(context, StudentProfile.class);
 
-
-                    showProfile.putExtra("STUDENT", studentItem.getId());
-
-
                 context.startActivity(showProfile);
             }
         }

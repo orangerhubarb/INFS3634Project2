@@ -24,24 +24,21 @@ public class TutorialsActivity extends AppCompatActivity {
     private TutorialsAdapter mAdapter;
     private ArrayList<Tutorial> tutorialsList;
     private LinearLayoutManager mLinearLayoutManager;
-    private Button addButton;
+    private Button addNewTutorialButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorials);
 
-        addButton = (Button) findViewById(R.id.addButton);
+        addNewTutorialButton = (Button) findViewById(R.id.addNewTutorialButton);
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        addNewTutorialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Tutorial tutorial = new Tutorial("INFS0000");
 
                 DBOpenHelper helper = new DBOpenHelper(TutorialsActivity.this);
                 TutorialsContract tutorialsContract = new TutorialsContract(helper);
-
-                tutorialsContract.insertNewTutorial(tutorial);
 
                 //This should redirect to a blank list of the students but working out Tutorials right now
                 Intent showClasses = new Intent(TutorialsActivity.this, NewTutorial.class);

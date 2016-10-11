@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
@@ -22,8 +23,8 @@ public class TutorialsContract {
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     TutorialEntry._ID + " INTEGER PRIMARY KEY," +
-                    TutorialEntry.COLUMN_NAME + " TEXT" +
-                    TutorialEntry.COLUMN_STUDENTS + " TEXT" + ")";
+                    TutorialEntry.COLUMN_NAME + " TEXT" + ")";
+
 
     public TutorialsContract(SQLiteOpenHelper dbHelper) {
         this.dbHelper = dbHelper;
@@ -32,7 +33,6 @@ public class TutorialsContract {
 
     public abstract class TutorialEntry implements BaseColumns {
         public static final String COLUMN_NAME = "name";
-        public static final String COLUMN_STUDENTS = "students";
 
 
     }
@@ -46,6 +46,7 @@ public class TutorialsContract {
         long newRowId;
         newRowId = db.insert(TABLE_NAME, null, values);
         db.close();
+        Log.d("Inserted Row", Long.toString(newRowId));
         return newRowId;
     }
 
@@ -75,6 +76,7 @@ public class TutorialsContract {
         while (cur.moveToNext()){
             Tutorial tutorial = new Tutorial();
             tutorial.setName(cur.getString(cur.getColumnIndexOrThrow(TutorialEntry.COLUMN_NAME)));
+            tutorial.setTutorialID(cur.getInt(cur.getColumnIndexOrThrow(TutorialEntry._ID)));
 
 
             tutorialsList.add(tutorial);

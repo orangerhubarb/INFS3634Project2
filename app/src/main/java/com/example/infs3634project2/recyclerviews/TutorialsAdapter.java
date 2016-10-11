@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
+import com.example.infs3634project2.storage.DBOpenHelper;
+import com.example.infs3634project2.storage.StudentsContract;
 import com.example.infs3634project2.views.StudentsActivity;
 
 import java.util.ArrayList;
@@ -78,11 +80,13 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
         public void onClick(View v) {
             Context context = v.getContext();
             Intent showStudent = new Intent(context, StudentsActivity.class);
-            if (tutorialItem.getStudents() != null) {
-                ArrayList<Student> studentList;
-                studentList = tutorialItem.getStudents();
-                Log.d("Debug", studentList.get(0).toString());
-                showStudent.putExtra("STUDENTS", studentList);
+
+            DBOpenHelper dbOpenHelper = new DBOpenHelper(context);
+            StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
+
+            if (studentsContract.getStudentsList(tutorialItem.getTutorialID()) != null) {
+               showStudent.putExtra("TutorialID", tutorialItem.getTutorialID());
+
             }
 
             context.startActivity(showStudent);

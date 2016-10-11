@@ -22,7 +22,8 @@
         <activity
             android:name=".views.StudentProfile"
             android:label="Student Profile" />
-        <activity android:name=".views.NewTutorial"></activity>
+        <activity android:name=".views.NewTutorial" />
+        <activity android:name=".views.NewStudent"></activity>
     </application>
 
 </manifest>

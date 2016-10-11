@@ -18,6 +18,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(TutorialsContract.SQL_CREATE_ENTRIES);
+        sqLiteDatabase.execSQL(StudentsContract.SQL_CREATE_ENTRIES);
     }
 
     @Override
