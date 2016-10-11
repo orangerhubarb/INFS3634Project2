@@ -42,7 +42,7 @@ public class StudentsContract {
         ContentValues values = new ContentValues();
         values.put(TutorialEntry.COLUMN_TUTORIAL, student.getTutorialID());
         values.put(TutorialEntry.COLUMN_FNAME, student.getFirstName());
-        values.put(TutorialEntry.COLUMN_LNAME, student.getFirstName());
+        values.put(TutorialEntry.COLUMN_LNAME, student.getLastName());
 
 
         long newRowId;
