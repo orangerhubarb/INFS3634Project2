@@ -8,22 +8,43 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.TutorialsActivity" />
+
+        <activity android:name=".views.TutorialsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
+        </activity>
+
         <activity
             android:name=".views.StudentsActivity"
-            android:label="Student List" />
+            android:label="Student List"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.TutorialsActivity"/>
+        </activity>
+
         <activity
             android:name=".views.StudentProfile"
-            android:label="Student Profile" />
-        <activity android:name=".views.NewTutorial" />
-        <activity android:name=".views.NewStudent"></activity>
+            android:label="Student Profile"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.StudentsActivity"/>
+        </activity>
+
+        <activity android:name=".views.NewTutorial"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".views.NewStudent"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

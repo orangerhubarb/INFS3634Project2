@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.infs3634project2.R;
-import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
 import com.example.infs3634project2.recyclerviews.TutorialsAdapter;
 import com.example.infs3634project2.storage.DBOpenHelper;
@@ -31,6 +31,11 @@ public class TutorialsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorials);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("My Classes");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         addNewTutorialButton = (Button) findViewById(R.id.addNewTutorialButton);
 
