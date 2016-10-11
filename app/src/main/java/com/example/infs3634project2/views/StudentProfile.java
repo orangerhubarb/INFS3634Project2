@@ -6,22 +6,31 @@ import android.widget.TextView;
 
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
+import com.example.infs3634project2.storage.DBOpenHelper;
+import com.example.infs3634project2.storage.StudentsContract;
 
 import java.util.ArrayList;
 
 public class StudentProfile extends AppCompatActivity {
 
     private TextView studentText;
+    Student student;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
 
-        studentText = (TextView) findViewById(R.id.studentID);
+        studentText = (TextView) findViewById(R.id.studentName);
 
-        int studentID = (int) getIntent().getSerializableExtra("STUDENT");
+        int studentID = (int) getIntent().getSerializableExtra("StudentID");
+        DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
+        StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
 
-        studentText.setText(Integer.toString(studentID));
+        student = studentsContract.getStudent(studentID);
+
+        studentText.setText(student.getFirstName() + " " + student.getLastName());
     }
 }

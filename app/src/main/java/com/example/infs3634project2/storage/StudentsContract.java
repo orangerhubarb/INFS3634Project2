@@ -20,17 +20,17 @@ public class StudentsContract {
 
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    TutorialEntry._ID + " INTEGER PRIMARY KEY," +
-                    TutorialEntry.COLUMN_TUTORIAL + " INTEGER," +
-                    TutorialEntry.COLUMN_FNAME + " TEXT," +
-                    TutorialEntry.COLUMN_LNAME + " TEXT" + ")";
+                    StudentEntry._ID + " INTEGER PRIMARY KEY," +
+                    StudentEntry.COLUMN_TUTORIAL + " INTEGER," +
+                    StudentEntry.COLUMN_FNAME + " TEXT," +
+                    StudentEntry.COLUMN_LNAME + " TEXT" + ")";
 
     public StudentsContract(SQLiteOpenHelper dbHelper) {
         this.dbHelper = dbHelper;
     }
 
 
-    public abstract class TutorialEntry implements BaseColumns {
+    public abstract class StudentEntry implements BaseColumns {
         public static final String COLUMN_TUTORIAL = "tutorial";
         public static final String COLUMN_FNAME = "fname";
         public static final String COLUMN_LNAME = "lname";
@@ -40,9 +40,9 @@ public class StudentsContract {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(TutorialEntry.COLUMN_TUTORIAL, student.getTutorialID());
-        values.put(TutorialEntry.COLUMN_FNAME, student.getFirstName());
-        values.put(TutorialEntry.COLUMN_LNAME, student.getLastName());
+        values.put(StudentEntry.COLUMN_TUTORIAL, student.getTutorialID());
+        values.put(StudentEntry.COLUMN_FNAME, student.getFirstName());
+        values.put(StudentEntry.COLUMN_LNAME, student.getLastName());
 
 
         long newRowId;
@@ -51,17 +51,18 @@ public class StudentsContract {
         return newRowId;
     }
 
-    public ArrayList<Student> getStudentsList(int tutorial) {
+    public ArrayList<Student> getStudentsList(int tutorialID) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String[] columns = {
-                TutorialEntry.COLUMN_TUTORIAL,
-                TutorialEntry.COLUMN_FNAME,
-                TutorialEntry.COLUMN_LNAME,
+                StudentEntry._ID,
+                StudentEntry.COLUMN_TUTORIAL,
+                StudentEntry.COLUMN_FNAME,
+                StudentEntry.COLUMN_LNAME,
 
         };
 
-        String sortOrder = TutorialEntry.COLUMN_LNAME;
+        String sortOrder = StudentEntry.COLUMN_LNAME;
 
         Cursor cur = db.query(
                 TABLE_NAME,
@@ -77,15 +78,49 @@ public class StudentsContract {
 
         while (cur.moveToNext()) {
 
-            if (cur.getInt(cur.getColumnIndexOrThrow(TutorialEntry.COLUMN_TUTORIAL)) == tutorial) {
+            if (cur.getInt(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_TUTORIAL)) == tutorialID) {
                 Student student = new Student();
-                student.setFirstName(cur.getString(cur.getColumnIndexOrThrow(TutorialEntry.COLUMN_FNAME)));
-                student.setLastName(cur.getString(cur.getColumnIndexOrThrow(TutorialEntry.COLUMN_LNAME)));
+                student.setFirstName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_FNAME)));
+                student.setLastName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_LNAME)));
+                student.setStudentID(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry._ID)));
                 studentList.add(student);
             }
         }
         cur.close();
         db.close();
         return studentList;
+    }
+
+    public Student getStudent(int studentID) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String selection = StudentEntry._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(studentID)};
+
+        String[] columns = {
+                StudentEntry.COLUMN_FNAME,
+                StudentEntry.COLUMN_LNAME,
+        };
+
+        Cursor cur = db.query(
+                TABLE_NAME,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        Student student = null;
+        if (cur.moveToNext()) {
+            student = new Student();
+            student.setFirstName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_FNAME)));
+            student.setLastName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_LNAME)));
+        }
+
+        cur.close();
+        db.close();
+        return student;
     }
 }

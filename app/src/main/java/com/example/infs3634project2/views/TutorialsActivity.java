@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class TutorialsActivity extends AppCompatActivity {
 
+    //The only way to get to the list of tutorials/students has to be through a button otherwise the list doesn't refresh
     private RecyclerView mRecyclerView;
     private TutorialsAdapter mAdapter;
     private ArrayList<Tutorial> tutorialsList;

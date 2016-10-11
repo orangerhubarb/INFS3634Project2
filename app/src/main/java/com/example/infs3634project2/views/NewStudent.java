@@ -45,9 +45,10 @@ public class NewStudent extends AppCompatActivity {
                 int studentID = (int) studentsContract.insertNewStudent(student);
 
                 //Have to change this so it redirects you to the new students page, or just back to the list??
-                Intent showClasses = new Intent(NewStudent.this, StudentsActivity.class);
-                showClasses.putExtra("TutorialID", tutorialID);
-                startActivity(showClasses);
+                Intent showStudentProfile = new Intent(NewStudent.this, StudentProfile.class);
+
+                showStudentProfile.putExtra("StudentID", studentID);
+                startActivity(showStudentProfile);
 
             }
         });

@@ -9,6 +9,7 @@ public class Student implements Serializable {
     private int tutorialID;
     private String firstName;
     private String lastName;
+    private int studentID;
 
     public Student() {
 
@@ -18,6 +19,14 @@ public class Student implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.tutorialID = tutorialID;
+    }
+
+    public int getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
 
     public int getTutorialID() { return tutorialID; };
