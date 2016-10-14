@@ -26,12 +26,67 @@
         android:maxLength="30"
         android:layout_below="@id/firstNameEditText"/>
 
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/zIDEditText"
+        android:hint="zID"
+        android:maxLines="1"
+        android:maxLength="30"
+        android:layout_below="@id/lastNameEditText"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yearOfDegreeEditText"
+        android:hint="Year of Degree (1st, 2nd)"
+        android:maxLines="1"
+        android:maxLength="30"
+        android:layout_below="@id/zIDEditText"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/degreeEditText"
+        android:hint="Degree"
+        android:maxLines="1"
+        android:maxLength="30"
+        android:layout_below="@id/yearOfDegreeEditText"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/githubURLEditText"
+        android:hint="Github URL"
+        android:maxLines="1"
+        android:maxLength="30"
+        android:layout_below="@id/degreeEditText"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/strengthsEditText"
+        android:hint="Strengths"
+        android:maxLines="1"
+        android:maxLength="30"
+        android:layout_below="@id/githubURLEditText"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/weaknessesEditText"
+        android:hint="Weaknesses"
+        android:maxLines="1"
+        android:maxLength="30"
+        android:layout_below="@id/strengthsEditText"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/confirmStudentAddButton"
         android:text="Add new Student"
-        android:layout_below="@+id/lastNameEditText"/>
+        android:layout_below="@+id/strengthsEditText"/>
 
 
 </RelativeLayout>

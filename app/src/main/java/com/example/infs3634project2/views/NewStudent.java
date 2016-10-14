@@ -19,6 +19,13 @@ public class NewStudent extends AppCompatActivity {
 
     private EditText firstNameEditText;
     private EditText lastNameEditText;
+    private EditText zID;
+    //Maybe change year of degree to the scroll thing??
+    private EditText yearOfDegree;
+    private EditText degree;
+    private EditText githubURL;
+    private EditText strengths;
+    private EditText weaknesses;
     private Button confirmStudentAddButton;
     private int tutorialID;
 
@@ -32,12 +39,28 @@ public class NewStudent extends AppCompatActivity {
 
         firstNameEditText = (EditText) findViewById(R.id.firstNameEditText);
         lastNameEditText = (EditText) findViewById(R.id.lastNameEditText);
+        zID = (EditText) findViewById(R.id.zIDEditText);
+        yearOfDegree = (EditText) findViewById(R.id.yearOfDegreeEditText);
+        githubURL = (EditText) findViewById(R.id.githubURLEditText);
+        strengths = (EditText) findViewById(R.id.strengthsEditText);
+        weaknesses = (EditText) findViewById(R.id.weaknessesEditText);
+
+
+
+
         confirmStudentAddButton = (Button) findViewById(R.id.confirmStudentAddButton);
 
         confirmStudentAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Student student = new Student(firstNameEditText.getText().toString(), lastNameEditText.getText().toString(), tutorialID);
+                Student student = new Student(firstNameEditText.getText().toString(), lastNameEditText.getText().toString(), tutorialID, zID.getText().toString());
+
+                //Probably chuck in cases here in case they leave stuff blank? But first name, last name, zID is compulsory
+                student.setYearOfDegree(Integer.parseInt(yearOfDegree.getText().toString()));
+                student.setGithubURL(githubURL.getText().toString());
+                student.setStrengths(strengths.getText().toString());
+                student.setWeaknesses(weaknesses.getText().toString());
+
 
                 DBOpenHelper helper = new DBOpenHelper(NewStudent.this);
                 StudentsContract studentsContract = new StudentsContract(helper);

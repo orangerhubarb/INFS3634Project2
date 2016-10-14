@@ -23,7 +23,13 @@ public class StudentsContract {
                     StudentEntry._ID + " INTEGER PRIMARY KEY," +
                     StudentEntry.COLUMN_TUTORIAL + " INTEGER," +
                     StudentEntry.COLUMN_FNAME + " TEXT," +
-                    StudentEntry.COLUMN_LNAME + " TEXT" + ")";
+                    StudentEntry.COLUMN_LNAME + " TEXT," +
+                    StudentEntry.COLUMN_ZID + " TEXT," +
+                    StudentEntry.COLUMN_YEAROFDEGREE + " INT," +
+                    StudentEntry.COLUMN_DEGREE + " TEXT," +
+                    StudentEntry.COLUMN_GITHUBURL + " TEXT," +
+                    StudentEntry.COLUMN_STRENGTHS + " TEXT," +
+                    StudentEntry.COLUMN_WEAKNESSES + " TEXT" + ")";
 
     public StudentsContract(SQLiteOpenHelper dbHelper) {
         this.dbHelper = dbHelper;
@@ -34,6 +40,13 @@ public class StudentsContract {
         public static final String COLUMN_TUTORIAL = "tutorial";
         public static final String COLUMN_FNAME = "fname";
         public static final String COLUMN_LNAME = "lname";
+        public static final String COLUMN_ZID = "zid";
+        public static final String COLUMN_YEAROFDEGREE = "yearofdegree";
+        public static final String COLUMN_DEGREE = "degree";
+        public static final String COLUMN_GITHUBURL = "githuburl";
+        public static final String COLUMN_STRENGTHS = "strengths";
+        public static final String COLUMN_WEAKNESSES = "weaknesses";
+
     }
 
     public long insertNewStudent(Student student) {
@@ -43,6 +56,13 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_TUTORIAL, student.getTutorialID());
         values.put(StudentEntry.COLUMN_FNAME, student.getFirstName());
         values.put(StudentEntry.COLUMN_LNAME, student.getLastName());
+        values.put(StudentEntry.COLUMN_ZID, student.getzID());
+        values.put(StudentEntry.COLUMN_YEAROFDEGREE, student.getYearOfDegree());
+        values.put(StudentEntry.COLUMN_DEGREE, student.getDegree());
+        values.put(StudentEntry.COLUMN_GITHUBURL, student.getGithubURL());
+        values.put(StudentEntry.COLUMN_STRENGTHS, student.getStrengths());
+        values.put(StudentEntry.COLUMN_WEAKNESSES, student.getWeaknesses());
+
 
 
         long newRowId;
@@ -59,7 +79,12 @@ public class StudentsContract {
                 StudentEntry.COLUMN_TUTORIAL,
                 StudentEntry.COLUMN_FNAME,
                 StudentEntry.COLUMN_LNAME,
-
+                StudentEntry.COLUMN_ZID,
+                StudentEntry.COLUMN_YEAROFDEGREE,
+                StudentEntry.COLUMN_DEGREE,
+                StudentEntry.COLUMN_GITHUBURL,
+                StudentEntry.COLUMN_STRENGTHS,
+                StudentEntry.COLUMN_WEAKNESSES
         };
 
         String sortOrder = StudentEntry.COLUMN_LNAME;
@@ -100,6 +125,7 @@ public class StudentsContract {
         String[] columns = {
                 StudentEntry.COLUMN_FNAME,
                 StudentEntry.COLUMN_LNAME,
+
         };
 
         Cursor cur = db.query(
@@ -117,6 +143,12 @@ public class StudentsContract {
             student = new Student();
             student.setFirstName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_FNAME)));
             student.setLastName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_LNAME)));
+            student.setzID(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_ZID)));
+            student.setYearOfDegree(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_YEAROFDEGREE)));
+            student.setDegree(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_DEGREE)));
+            student.setGithubURL(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_GITHUBURL)));
+            student.setStrengths(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_STRENGTHS)));
+            student.setWeaknesses(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_WEAKNESSES)));
         }
 
         cur.close();
