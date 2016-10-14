@@ -1,6 +1,7 @@
 package com.example.infs3634project2.views;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,7 +26,6 @@ public class StudentsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private StudentsAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private Button addStudentButton;
     private int tutorialID;
 
     @Override
@@ -38,10 +38,11 @@ public class StudentsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        addStudentButton = (Button) findViewById(R.id.addStudentButton);
         tutorialID = (int) getIntent().getSerializableExtra("TutorialID");
 
-        addStudentButton.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -58,8 +59,6 @@ public class StudentsActivity extends AppCompatActivity {
 
         DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
         StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
-
-
 
         if (studentsContract.getStudentsList(tutorialID) != null) {
 
