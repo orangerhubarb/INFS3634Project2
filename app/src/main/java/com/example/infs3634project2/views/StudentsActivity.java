@@ -5,15 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
-import com.example.infs3634project2.model.Tutorial;
 import com.example.infs3634project2.recyclerviews.StudentsAdapter;
-import com.example.infs3634project2.recyclerviews.TutorialsAdapter;
 import com.example.infs3634project2.storage.DBOpenHelper;
 import com.example.infs3634project2.storage.StudentsContract;
 import com.example.infs3634project2.storage.TutorialsContract;
@@ -33,6 +32,11 @@ public class StudentsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("My Students");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         addStudentButton = (Button) findViewById(R.id.addStudentButton);
         tutorialID = (int) getIntent().getSerializableExtra("TutorialID");

@@ -33,9 +33,6 @@ public class TutorialsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tutorials);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Classes");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         addNewTutorialButton = (Button) findViewById(R.id.addNewTutorialButton);
 
