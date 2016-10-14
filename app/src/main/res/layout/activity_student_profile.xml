@@ -12,7 +12,44 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/studentName"/>
+        android:id="@+id/studentName"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/zIDTextView"
+        android:layout_below="@+id/studentName"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/yearOfDegreeTextView"
+        android:layout_below="@+id/zIDTextView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/degreeTextView"
+        android:layout_below="@+id/yearOfDegreeTextView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/githubURLTextView"
+        android:layout_below="@id/degreeTextView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/strengthsTextView"
+        android:layout_below="@+id/githubURLTextView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/weaknessesTextView"
+        android:layout_below="@+id/strengthsTextView"/>
 
 
 </RelativeLayout>
