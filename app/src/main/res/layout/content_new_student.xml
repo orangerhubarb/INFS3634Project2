@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/confirmStudentAddButton"
         android:text="Add new Student"
-        android:layout_below="@+id/strengthsEditText"/>
+        android:layout_below="@+id/weaknessesEditText"/>
 
 
 </RelativeLayout>
