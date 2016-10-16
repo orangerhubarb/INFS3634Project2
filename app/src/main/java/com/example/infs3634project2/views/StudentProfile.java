@@ -17,8 +17,6 @@ public class StudentProfile extends AppCompatActivity {
     private TextView studentText;
     Student student;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
