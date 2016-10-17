@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
@@ -125,6 +126,12 @@ public class StudentsContract {
         String[] columns = {
                 StudentEntry.COLUMN_FNAME,
                 StudentEntry.COLUMN_LNAME,
+                StudentEntry.COLUMN_ZID,
+                StudentEntry.COLUMN_YEAROFDEGREE,
+                StudentEntry.COLUMN_DEGREE,
+                StudentEntry.COLUMN_GITHUBURL,
+                StudentEntry.COLUMN_STRENGTHS,
+                StudentEntry.COLUMN_WEAKNESSES
 
         };
 
@@ -143,6 +150,7 @@ public class StudentsContract {
             student = new Student();
             student.setFirstName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_FNAME)));
             student.setLastName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_LNAME)));
+            Log.d("Debug", "Name obtained");
             student.setzID(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_ZID)));
             student.setYearOfDegree(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_YEAROFDEGREE)));
             student.setDegree(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_DEGREE)));

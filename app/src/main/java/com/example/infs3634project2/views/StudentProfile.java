@@ -3,8 +3,11 @@ package com.example.infs3634project2.views;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.example.infs3634project2.Data.GitHubCallback;
+import com.example.infs3634project2.Data.GitHubDataProvider;
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.storage.DBOpenHelper;
@@ -12,7 +15,7 @@ import com.example.infs3634project2.storage.StudentsContract;
 
 import java.util.ArrayList;
 
-public class StudentProfile extends AppCompatActivity {
+public class StudentProfile extends AppCompatActivity implements GitHubCallback{
 
     private TextView studentText;
     Student student;
@@ -36,5 +39,18 @@ public class StudentProfile extends AppCompatActivity {
         student = studentsContract.getStudent(studentID);
 
         studentText.setText(student.getFirstName() + " " + student.getLastName());
+        GitHubDataProvider gitHubDataProvider = new GitHubDataProvider(this);
+        gitHubDataProvider.setmListener(this);
+        gitHubDataProvider.getGitProject("Pass this URL");
+    }
+
+    @Override
+    public void onTaskCompleted() {
+        Log.d("Debug", "URL has been passed");
+    }
+
+    @Override
+    public void onFailure(String fail) {
+
     }
 }
