@@ -41,7 +41,7 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback{
         studentText.setText(student.getFirstName() + " " + student.getLastName());
         GitHubDataProvider gitHubDataProvider = new GitHubDataProvider(this);
         gitHubDataProvider.setmListener(this);
-        gitHubDataProvider.getGitProject("Pass this URL");
+        gitHubDataProvider.getGitProject("rachellini");
     }
 
     @Override
