@@ -47,6 +47,7 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback{
     @Override
     public void onTaskCompleted() {
         Log.d("Debug", "URL has been passed");
+        //Obviously after this has been obtained, then we set all the layout shit.
     }
 
     @Override
