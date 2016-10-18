@@ -1,6 +1,8 @@
 package com.example.infs3634project2.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Davian on 6/10/16.
@@ -13,9 +15,11 @@ public class Student implements Serializable {
     private String zID;
     private int yearOfDegree;
     private String degree;
-    private String githubURL;
+    private String githubUsername;
     private String strengths;
     private String weaknesses;
+
+    private List<String> todoList = new ArrayList<>();
 
     public Student() {
 
@@ -28,12 +32,32 @@ public class Student implements Serializable {
         this.zID = zID;
     }
 
-    public String getGithubURL() {
-        return githubURL;
+    public Student(String firstName, String lastName, int tutorialID, String zID, int yearOfDegree, String degree, String githubUsername, String strengths, String weaknesses) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.tutorialID = tutorialID;
+        this.zID = zID;
+        this.yearOfDegree = yearOfDegree;
+        this.degree = degree;
+        this.githubUsername = githubUsername;
+        this.strengths = strengths;
+        this.weaknesses = weaknesses;
     }
 
-    public void setGithubURL(String githubURL) {
-        this.githubURL = githubURL;
+    public List<String> getTodoList() {
+        return todoList;
+    }
+
+    public void setTodoList(List<String> todoList) {
+        this.todoList = todoList;
+    }
+
+    public String getGithubUsername() {
+        return githubUsername;
+    }
+
+    public void setGithubUsername(String githubUsername) {
+        this.githubUsername = githubUsername;
     }
 
     public String getzID() {

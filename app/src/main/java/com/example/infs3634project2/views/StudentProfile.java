@@ -1,24 +1,57 @@
 package com.example.infs3634project2.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.infs3634project2.Data.GitHubCallback;
 import com.example.infs3634project2.Data.GitHubDataProvider;
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
+import com.example.infs3634project2.recyclerviews.ProjectsAdapter;
+import com.example.infs3634project2.recyclerviews.StudentsAdapter;
+import com.example.infs3634project2.recyclerviews.TodoAdapter;
 import com.example.infs3634project2.storage.DBOpenHelper;
 import com.example.infs3634project2.storage.StudentsContract;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
-public class StudentProfile extends AppCompatActivity implements GitHubCallback{
+public class StudentProfile extends AppCompatActivity implements GitHubCallback<ArrayList<String>>{
 
-    private TextView studentText;
-    Student student;
+    private DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
+    private StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
+
+    private TextView studentName;
+    private TextView studentZID;
+    private TextView studentDegree;
+    private TextView studentYear;
+    private TextView studentStrength;
+    private TextView studentWeakness;
+    private Student student;
+
+    private RecyclerView projectsRecyclerView;
+    private ProjectsAdapter projectsAdapter;
+    private LinearLayoutManager projectsLinearLayoutManager;
+
+    private RecyclerView todoRecyclerView;
+    private TodoAdapter todoAdapter;
+    private LinearLayoutManager todoLinearLayoutManager;
+
+    private List<String> newTodoList;
+    private EditText newTodoEntry;
+    private Button todoEntryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,24 +63,79 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        studentText = (TextView) findViewById(R.id.studentName);
+        studentName = (TextView) findViewById(R.id.studentName);
+        studentZID = (TextView) findViewById(R.id.zIDTextView);
+        studentDegree = (TextView) findViewById(R.id.degreeTextView);
+        studentYear = (TextView) findViewById(R.id.yearOfDegreeTextView);
+        studentStrength = (TextView) findViewById(R.id.strengthsTextView);
+        studentWeakness = (TextView) findViewById(R.id.weaknessesTextView);
 
-        int studentID = (int) getIntent().getSerializableExtra("StudentID");
-        DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
-        StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
+        newTodoEntry = (EditText) findViewById(R.id.newTodoEntry);
+        todoEntryButton = (Button) findViewById(R.id.todoEntryButton);
+
+        final int studentID = (int) getIntent().getSerializableExtra("StudentID");
 
         student = studentsContract.getStudent(studentID);
 
-        studentText.setText(student.getFirstName() + " " + student.getLastName());
+        studentName.setText(student.getFirstName() + " " + student.getLastName());
+        studentZID.setText("(" + student.getzID() + ")");
+        studentDegree.setText(student.getDegree());
+        studentYear.setText(String.valueOf(student.getYearOfDegree()));
+        studentStrength.setText(student.getStrengths());
+        studentWeakness.setText(student.getWeaknesses());
+
+        String githubUser = student.getGithubUsername();
         GitHubDataProvider gitHubDataProvider = new GitHubDataProvider(this);
-        gitHubDataProvider.setmListener(this);
-        gitHubDataProvider.getGitProject("rachellini");
+        gitHubDataProvider.getGitProject(githubUser, this);
+
+        newTodoList = student.getTodoList();
+
+        todoRecyclerView = (RecyclerView) findViewById(R.id.todoRecyclerView);
+        todoAdapter =  new TodoAdapter(newTodoList, this);
+        todoRecyclerView.setAdapter(todoAdapter);
+        todoLinearLayoutManager = new LinearLayoutManager(this);
+        todoRecyclerView.setLayoutManager(todoLinearLayoutManager);
+        Log.d("Todo List Return", newTodoList.toString());
+
+        todoEntryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newEntry = newTodoEntry.getText().toString();
+                newTodoList.add(newEntry);
+                studentsContract.updateTodoList(newTodoList, studentID);
+                todoAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
+    public void recalculateTodo(List<String> todoList) {
+        student.setTodoList(todoList);
+    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == android.R.id.home) {
+//            Intent showClasses = new Intent(StudentProfile.this, StudentsActivity.class);
+//            showClasses.putExtra("TutorialID", student.getTutorialID());
+//            startActivity(showClasses);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
     @Override
-    public void onTaskCompleted() {
+    public void onTaskCompleted(ArrayList<String> listOfProjects) {
         Log.d("Debug", "URL has been passed");
         //Obviously after this has been obtained, then we set all the layout shit.
+
+        projectsRecyclerView = (RecyclerView) findViewById(R.id.projectsRecyclerView);
+        projectsAdapter =  new ProjectsAdapter(listOfProjects);
+        projectsRecyclerView.setAdapter(projectsAdapter);
+
+        projectsLinearLayoutManager = new LinearLayoutManager(this);
+        projectsRecyclerView.setLayoutManager(projectsLinearLayoutManager);
+        Log.d("Student List Return", listOfProjects.toString());
     }
 
     @Override

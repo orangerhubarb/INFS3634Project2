@@ -46,9 +46,6 @@ public class StudentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DBOpenHelper helper = new DBOpenHelper(StudentsActivity.this);
-                TutorialsContract tutorialsContract = new TutorialsContract(helper);
-
                 //This should redirect to a blank list of the students but working out Tutorials right now
                 Intent showClasses = new Intent(StudentsActivity.this, NewStudent.class);
                 showClasses.putExtra("TutorialID", tutorialID);
@@ -72,6 +69,5 @@ public class StudentsActivity extends AppCompatActivity {
             mRecyclerView.setLayoutManager(mLinearLayoutManager);
             Log.d("Student List Return", studentsList.toString());
         }
-
     }
 }

@@ -8,9 +8,10 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.infs3634project2.model.Student;
-import com.example.infs3634project2.model.Tutorial;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Davian on 11/10/16.
@@ -30,7 +31,8 @@ public class StudentsContract {
                     StudentEntry.COLUMN_DEGREE + " TEXT," +
                     StudentEntry.COLUMN_GITHUBURL + " TEXT," +
                     StudentEntry.COLUMN_STRENGTHS + " TEXT," +
-                    StudentEntry.COLUMN_WEAKNESSES + " TEXT" + ")";
+                    StudentEntry.COLUMN_WEAKNESSES + " TEXT," +
+                    StudentEntry.COLUMN_TODO + " TEXT" + ")";
 
     public StudentsContract(SQLiteOpenHelper dbHelper) {
         this.dbHelper = dbHelper;
@@ -47,6 +49,7 @@ public class StudentsContract {
         public static final String COLUMN_GITHUBURL = "githuburl";
         public static final String COLUMN_STRENGTHS = "strengths";
         public static final String COLUMN_WEAKNESSES = "weaknesses";
+        public static final String COLUMN_TODO = "todo";
 
     }
 
@@ -60,11 +63,10 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_ZID, student.getzID());
         values.put(StudentEntry.COLUMN_YEAROFDEGREE, student.getYearOfDegree());
         values.put(StudentEntry.COLUMN_DEGREE, student.getDegree());
-        values.put(StudentEntry.COLUMN_GITHUBURL, student.getGithubURL());
+        values.put(StudentEntry.COLUMN_GITHUBURL, student.getGithubUsername());
         values.put(StudentEntry.COLUMN_STRENGTHS, student.getStrengths());
         values.put(StudentEntry.COLUMN_WEAKNESSES, student.getWeaknesses());
-
-
+        values.put(StudentEntry.COLUMN_TODO, convertArrayToString(student.getTodoList()));
 
         long newRowId;
         newRowId = db.insert(TABLE_NAME, null, values);
@@ -77,15 +79,8 @@ public class StudentsContract {
 
         String[] columns = {
                 StudentEntry._ID,
-                StudentEntry.COLUMN_TUTORIAL,
                 StudentEntry.COLUMN_FNAME,
                 StudentEntry.COLUMN_LNAME,
-                StudentEntry.COLUMN_ZID,
-                StudentEntry.COLUMN_YEAROFDEGREE,
-                StudentEntry.COLUMN_DEGREE,
-                StudentEntry.COLUMN_GITHUBURL,
-                StudentEntry.COLUMN_STRENGTHS,
-                StudentEntry.COLUMN_WEAKNESSES
         };
 
         String sortOrder = StudentEntry.COLUMN_LNAME;
@@ -131,8 +126,8 @@ public class StudentsContract {
                 StudentEntry.COLUMN_DEGREE,
                 StudentEntry.COLUMN_GITHUBURL,
                 StudentEntry.COLUMN_STRENGTHS,
-                StudentEntry.COLUMN_WEAKNESSES
-
+                StudentEntry.COLUMN_WEAKNESSES,
+                StudentEntry.COLUMN_TODO
         };
 
         Cursor cur = db.query(
@@ -154,13 +149,42 @@ public class StudentsContract {
             student.setzID(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_ZID)));
             student.setYearOfDegree(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_YEAROFDEGREE)));
             student.setDegree(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_DEGREE)));
-            student.setGithubURL(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_GITHUBURL)));
+            student.setGithubUsername(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_GITHUBURL)));
             student.setStrengths(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_STRENGTHS)));
             student.setWeaknesses(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_WEAKNESSES)));
+            student.setTodoList(convertStringToArray(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_TODO))));
         }
 
         cur.close();
         db.close();
         return student;
+    }
+
+    public void updateTodoList(List<String> newTodoList, int id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("todo", convertArrayToString(newTodoList));
+        db.update(TABLE_NAME, values, "_id="+id, null);
+
+    }
+
+    //Converts a String array to string to store it
+    public static String convertArrayToString(List<String> array) {
+        String stringArray = "";
+        for(String item : array) {
+            stringArray += item;
+
+            if(array.indexOf(item) != array.size()-1) {
+                stringArray += ", ";
+            }
+        }
+        return stringArray;
+    }
+
+    //Converts the string back to a String Array
+    public static List<String> convertStringToArray(String string) {
+        List<String> array = Arrays.asList(string.split("\\s*,\\s*"));
+        return array;
     }
 }

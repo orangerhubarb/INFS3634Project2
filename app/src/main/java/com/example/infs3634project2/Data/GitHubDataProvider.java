@@ -16,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by student on 17/10/2016.
  */
@@ -23,23 +25,18 @@ import org.json.JSONObject;
 public class GitHubDataProvider{
 
     private Context context;
-    GitHubCallback mCallback = null;
-    String listOfProjects = "";
+    ArrayList<String> listOfProjects = new ArrayList<>();
 
     public GitHubDataProvider(Context context) {
         this.context = context;
     }
 
-    public void setmListener (GitHubCallback callback) {
-        mCallback = callback;
-    }
-
-    public void getGitProject(final String username) {
+    public void getGitProject(final String username, final GitHubCallback<ArrayList<String>> callback) {
         Log.d("Debug", username);
         String apiURL = "https://api.github.com/users/" + username + "/repos";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        JsonArrayRequest listObject = new JsonArrayRequest(Request.Method.GET, apiURL,
+        final JsonArrayRequest listObject = new JsonArrayRequest(Request.Method.GET, apiURL,
 
                 new Response.Listener<JSONArray>() {
 
@@ -50,17 +47,15 @@ public class GitHubDataProvider{
 
                             for(int i = 0 ; i < response.length() ; i++) {
                                 JSONObject currentProject = response.getJSONObject(i);
-                                listOfProjects += currentProject.getString("name");
-
+                                listOfProjects.add(currentProject.getString("name"));
                             }
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        Log.d("Debug", listOfProjects);
-                        mCallback.onTaskCompleted();
+                        Log.d("Debug", listOfProjects.toString());
+                        callback.onTaskCompleted(listOfProjects);
                     }
                 },
 
@@ -72,10 +67,7 @@ public class GitHubDataProvider{
                         error.printStackTrace();
                     }
                 }
-
         );
-
         requestQueue.add(listObject);
-
     }
 }

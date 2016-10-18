@@ -26,7 +26,6 @@ public class TutorialsActivity extends AppCompatActivity {
     private TutorialsAdapter mAdapter;
     private ArrayList<Tutorial> tutorialsList;
     private LinearLayoutManager mLinearLayoutManager;
-    private Button addNewTutorialButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +39,23 @@ public class TutorialsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                DBOpenHelper helper = new DBOpenHelper(TutorialsActivity.this);
-                TutorialsContract tutorialsContract = new TutorialsContract(helper);
-
                 //This should redirect to a blank list of the students but working out Tutorials right now
                 Intent showClasses = new Intent(TutorialsActivity.this, NewTutorial.class);
                 startActivity(showClasses);
-
             }
         });
 
         DBOpenHelper helper = new DBOpenHelper(this);
-        SQLiteDatabase db = helper.getWritableDatabase();
+//        SQLiteDatabase db = helper.getWritableDatabase();
         TutorialsContract tutorialsContract = new TutorialsContract(helper);
 
         tutorialsList = tutorialsContract.getTutorials();
 
-
         mRecyclerView = (RecyclerView) findViewById(R.id.tutorialsRecylerView);
-        mAdapter =  new TutorialsAdapter(tutorialsList);
+        mAdapter = new TutorialsAdapter(tutorialsList);
         mRecyclerView.setAdapter(mAdapter);
 
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-
     }
 }

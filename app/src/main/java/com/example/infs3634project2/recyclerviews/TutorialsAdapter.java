@@ -47,7 +47,6 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
             Log.d("Debug", itemTutorial.getStudents().toString());
         }
         holder.bindTutorial(itemTutorial);
-
     }
 
     @Override
@@ -62,34 +61,28 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
 
         public TutorialsHolder(View itemView) {
             super(itemView);
-
             tutorialName = (TextView) itemView.findViewById(R.id.tutorial_name);
-
             itemView.setOnClickListener(this);
-
-
         }
 
         public void bindTutorial (Tutorial tutorialItem) {
             this.tutorialItem = tutorialItem;
             tutorialName.setText(tutorialItem.getName());
-
         }
 
         @Override
         public void onClick(View v) {
             Context context = v.getContext();
-            Intent showStudent = new Intent(context, StudentsActivity.class);
+            Intent showStudents = new Intent(context, StudentsActivity.class);
 
             DBOpenHelper dbOpenHelper = new DBOpenHelper(context);
             StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
 
             if (studentsContract.getStudentsList(tutorialItem.getTutorialID()) != null) {
-               showStudent.putExtra("TutorialID", tutorialItem.getTutorialID());
-
+               showStudents.putExtra("TutorialID", tutorialItem.getTutorialID());
             }
 
-            context.startActivity(showStudent);
+            context.startActivity(showStudents);
         }
     }
 }

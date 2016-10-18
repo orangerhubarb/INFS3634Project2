@@ -12,16 +12,9 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_tutorials">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click me to enter new tutorials!"
-        android:id="@+id/addNewTutorialButton" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tutorialsRecylerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/addNewTutorialButton"/>
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
