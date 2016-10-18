@@ -91,7 +91,7 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         newTodoList = student.getTodoList();
 
         todoRecyclerView = (RecyclerView) findViewById(R.id.todoRecyclerView);
-        todoAdapter =  new TodoAdapter(newTodoList, this);
+        todoAdapter =  new TodoAdapter(newTodoList, this, studentID);
         todoRecyclerView.setAdapter(todoAdapter);
         todoLinearLayoutManager = new LinearLayoutManager(this);
         todoRecyclerView.setLayoutManager(todoLinearLayoutManager);

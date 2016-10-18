@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
+import com.example.infs3634project2.storage.DBOpenHelper;
+import com.example.infs3634project2.storage.StudentsContract;
 import com.example.infs3634project2.views.StudentProfile;
 import com.example.infs3634project2.views.StudentsActivity;
 
@@ -29,10 +31,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder> {
 
     private static List<String> todoList;
     private StudentProfile studentProfile;
+    private int studentID;
 
-    public TodoAdapter(List<String> todoList, StudentProfile studentProfile) {
+    public TodoAdapter(List<String> todoList, StudentProfile studentProfile, int studentID) {
         this.todoList = todoList;
         this.studentProfile = studentProfile;
+        this.studentID = studentID;
     }
 
     @Override
@@ -66,7 +70,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder> {
             todoItem = (TextView) itemView.findViewById(R.id.todo_item);
             delete = (ImageButton) itemView.findViewById(R.id.rubbishbin);
             delete.setOnClickListener(this);
-
         }
 
         public void bindProject(String todo) {
@@ -80,6 +83,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder> {
 
         public void removeAt(int position) {
             todoList.remove(position);
+            DBOpenHelper dbOpenHelper = new DBOpenHelper(studentProfile);
+            StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
+            studentsContract.updateTodoList(todoList, studentID);
             notifyDataSetChanged();
             studentProfile.recalculateTodo(todoList);
         }

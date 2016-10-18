@@ -79,8 +79,16 @@ public class StudentsContract {
 
         String[] columns = {
                 StudentEntry._ID,
+                StudentEntry.COLUMN_TUTORIAL,
                 StudentEntry.COLUMN_FNAME,
                 StudentEntry.COLUMN_LNAME,
+                StudentEntry.COLUMN_ZID,
+                StudentEntry.COLUMN_YEAROFDEGREE,
+                StudentEntry.COLUMN_DEGREE,
+                StudentEntry.COLUMN_GITHUBURL,
+                StudentEntry.COLUMN_STRENGTHS,
+                StudentEntry.COLUMN_WEAKNESSES,
+                StudentEntry.COLUMN_TODO
         };
 
         String sortOrder = StudentEntry.COLUMN_LNAME;
@@ -119,6 +127,8 @@ public class StudentsContract {
         String[] selectionArgs = {String.valueOf(studentID)};
 
         String[] columns = {
+                StudentEntry._ID,
+                StudentEntry.COLUMN_TUTORIAL,
                 StudentEntry.COLUMN_FNAME,
                 StudentEntry.COLUMN_LNAME,
                 StudentEntry.COLUMN_ZID,
@@ -171,7 +181,7 @@ public class StudentsContract {
 
     //Converts a String array to string to store it
     public static String convertArrayToString(List<String> array) {
-        String stringArray = "";
+        String stringArray = null;
         for(String item : array) {
             stringArray += item;
 
@@ -184,7 +194,12 @@ public class StudentsContract {
 
     //Converts the string back to a String Array
     public static List<String> convertStringToArray(String string) {
-        List<String> array = Arrays.asList(string.split("\\s*,\\s*"));
-        return array;
+        if(string == null) {
+            List<String> blankArray = new ArrayList<>();
+            return blankArray;
+        } else {
+            List<String> array = new ArrayList<>(Arrays.asList(string.split("\\s*,\\s*")));
+            return array;
+        }
     }
 }

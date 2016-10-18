@@ -46,7 +46,7 @@ public class TutorialsActivity extends AppCompatActivity {
         });
 
         DBOpenHelper helper = new DBOpenHelper(this);
-//        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase db = helper.getWritableDatabase();
         TutorialsContract tutorialsContract = new TutorialsContract(helper);
 
         tutorialsList = tutorialsContract.getTutorials();
