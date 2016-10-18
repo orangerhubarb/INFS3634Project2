@@ -1,6 +1,7 @@
 package com.example.infs3634project2.views;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,15 +9,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.storage.DBOpenHelper;
 import com.example.infs3634project2.storage.StudentsContract;
 
+import org.w3c.dom.Text;
+
 public class NewStudent extends AppCompatActivity {
 
     private EditText firstNameEditText;
+    private TextInputLayout firstNameError;
+
     private EditText lastNameEditText;
     private EditText zIDEditText;
     //Maybe change year of degree to the scroll thing??
@@ -42,6 +48,8 @@ public class NewStudent extends AppCompatActivity {
         Log.d("New Student Tutorial ID", Integer.toString(tutorialID));
 
         firstNameEditText = (EditText) findViewById(R.id.firstNameEditText);
+        firstNameError = (TextInputLayout) findViewById(R.id.firstNameTextInput);
+
         lastNameEditText = (EditText) findViewById(R.id.lastNameEditText);
         zIDEditText = (EditText) findViewById(R.id.zIDEditText);
 
@@ -56,7 +64,15 @@ public class NewStudent extends AppCompatActivity {
         confirmStudentAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean noError = true;
+
                 String fName = firstNameEditText.getText().toString();
+                if(fName.matches("")) {
+                    firstNameError.setErrorEnabled(true);
+                    firstNameError.setError("You have not provided a first name.");
+                    noError = false;
+                }
+
                 String lName = lastNameEditText.getText().toString();
                 String zID = zIDEditText.getText().toString();
                 String degree = degreeEditText.getText().toString();
@@ -65,22 +81,25 @@ public class NewStudent extends AppCompatActivity {
                 String strength = strengths.getText().toString();
                 String weakness = weaknesses.getText().toString();
 
-                Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
+                if(noError == true) {
 
-                Log.d("DEBUG NEW", student.getzID() + student.getYearOfDegree() + student.getDegree());
+                    Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
 
-                //Probably chuck in cases here in case they leave stuff blank? But first name, last name, zID is compulsory
+                    Log.d("DEBUG NEW", student.getzID() + student.getYearOfDegree() + student.getDegree());
 
-                DBOpenHelper helper = new DBOpenHelper(NewStudent.this);
-                StudentsContract studentsContract = new StudentsContract(helper);
+                    //Probably chuck in cases here in case they leave stuff blank? But first name, last name, zID is compulsory
 
-                int studentID = (int) studentsContract.insertNewStudent(student);
+                    DBOpenHelper helper = new DBOpenHelper(NewStudent.this);
+                    StudentsContract studentsContract = new StudentsContract(helper);
 
-                //Have to change this so it redirects you to the new students page, or just back to the list??
-                Intent showStudentProfile = new Intent(NewStudent.this, StudentProfile.class);
+                    int studentID = (int) studentsContract.insertNewStudent(student);
 
-                showStudentProfile.putExtra("StudentID", studentID);
-                startActivity(showStudentProfile);
+                    //Have to change this so it redirects you to the new students page, or just back to the list??
+                    Intent showStudentProfile = new Intent(NewStudent.this, StudentProfile.class);
+
+                    showStudentProfile.putExtra("StudentID", studentID);
+                    startActivity(showStudentProfile);
+                }
 
             }
         });
