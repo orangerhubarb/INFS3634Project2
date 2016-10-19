@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.infs3634project2.R;
@@ -38,6 +39,8 @@ public class NewStudent extends AppCompatActivity {
     private Button confirmStudentAddButton;
     private int tutorialID;
 
+    private ImageButton backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +48,20 @@ public class NewStudent extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("New Student");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent showStudents = new Intent(NewStudent.this, StudentsActivity.class);
+                showStudents.putExtra("TutorialID", tutorialID);
+                startActivity(showStudents);
+            }
+        });
 
         tutorialID = (int) getIntent().getSerializableExtra("TutorialID");
-        Log.d("New Student Tutorial ID", Integer.toString(tutorialID));
+        Log.d("New Student TID", Integer.toString(tutorialID));
 
         firstNameEditText = (EditText) findViewById(R.id.firstNameEditText);
         firstNameError = (TextInputLayout) findViewById(R.id.firstNameTextInput);
@@ -108,8 +120,6 @@ public class NewStudent extends AppCompatActivity {
 
                     Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
 
-                    Log.d("DEBUG NEW", student.getzID() + student.getYearOfDegree() + student.getDegree());
-
                     //Probably chuck in cases here in case they leave stuff blank? But first name, last name, zID is compulsory
 
                     DBOpenHelper helper = new DBOpenHelper(NewStudent.this);
@@ -121,6 +131,7 @@ public class NewStudent extends AppCompatActivity {
                     Intent showStudentProfile = new Intent(NewStudent.this, StudentProfile.class);
 
                     showStudentProfile.putExtra("StudentID", studentID);
+                    showStudentProfile.putExtra("TutorialID", tutorialID);
                     startActivity(showStudentProfile);
                 }
 

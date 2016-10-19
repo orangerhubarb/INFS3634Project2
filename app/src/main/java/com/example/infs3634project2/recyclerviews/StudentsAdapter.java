@@ -64,7 +64,6 @@ import java.util.ArrayList;
 
                 itemView.setOnClickListener(this);
 
-
             }
 
             public void bindStudent (Student studentItem) {
@@ -79,6 +78,8 @@ import java.util.ArrayList;
                 Context context = v.getContext();
                 Intent showProfile = new Intent(context, StudentProfile.class);
                 showProfile.putExtra("StudentID", studentItem.getStudentID());
+                showProfile.putExtra("TutorialID", studentItem.getTutorialID());
+                Log.d("DEBUG SADAPT SID TID", String.valueOf(studentItem.getStudentID()) + " " + String.valueOf(studentItem.getTutorialID()));
 
                 context.startActivity(showProfile);
             }

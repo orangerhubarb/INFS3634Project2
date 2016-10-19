@@ -66,6 +66,7 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
         }
 
         public void bindTutorial (Tutorial tutorialItem) {
+
             this.tutorialItem = tutorialItem;
             tutorialName.setText(tutorialItem.getName());
         }
@@ -80,6 +81,7 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
 
             if (studentsContract.getStudentsList(tutorialItem.getTutorialID()) != null) {
                showStudents.putExtra("TutorialID", tutorialItem.getTutorialID());
+                Log.d("DEBUG TADAPT TID", String.valueOf(tutorialItem.getTutorialID()));
             }
 
             context.startActivity(showStudents);

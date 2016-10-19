@@ -39,18 +39,18 @@ public class StudentsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tutorialID = (int) getIntent().getSerializableExtra("TutorialID");
+        Log.d("DEBUG SACTIVITY SER TID", String.valueOf(tutorialID));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //This should redirect to a blank list of the students but working out Tutorials right now
                 Intent showClasses = new Intent(StudentsActivity.this, NewStudent.class);
                 showClasses.putExtra("TutorialID", tutorialID);
+                Log.d("DEBUG SACTIVITY TID", String.valueOf(tutorialID));
                 startActivity(showClasses);
-
             }
         });
 

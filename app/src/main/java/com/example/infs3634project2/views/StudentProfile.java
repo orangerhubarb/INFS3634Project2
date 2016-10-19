@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.infs3634project2.Data.GitHubCallback;
@@ -54,6 +55,9 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
     private List<String> newTodoList;
     private EditText newTodoEntry;
     private Button todoEntryButton;
+    private ImageButton backButton;
+
+    private int tutorialID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +66,21 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Student");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent showStudents = new Intent(StudentProfile.this, StudentsActivity.class);
+                showStudents.putExtra("TutorialID", tutorialID);
+                Log.d("DEBUG SPROFILE TID", String.valueOf(tutorialID));
+                startActivity(showStudents);
+            }
+        });
 
         editStudentButton = (Button) findViewById(R.id.editStudentButton);
+
         editStudentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +101,9 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
             }
         });
 
+        studentID = (int) getIntent().getSerializableExtra("StudentID");
+        tutorialID = (int) getIntent().getSerializableExtra("TutorialID");
+
         studentName = (TextView) findViewById(R.id.studentName);
         studentZID = (TextView) findViewById(R.id.zIDTextView);
         studentDegree = (TextView) findViewById(R.id.degreeTextView);
@@ -95,8 +113,6 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
 
         newTodoEntry = (EditText) findViewById(R.id.newTodoEntry);
         todoEntryButton = (Button) findViewById(R.id.todoEntryButton);
-
-        studentID = (int) getIntent().getSerializableExtra("StudentID");
 
         student = studentsContract.getStudent(studentID);
 

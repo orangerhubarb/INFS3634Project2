@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
@@ -47,6 +48,8 @@ public class EditStudent extends AppCompatActivity {
     private int tutorialID;
     private int studentID;
 
+    private ImageButton backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +57,18 @@ public class EditStudent extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Edit Student");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent showStudents = new Intent(EditStudent.this, StudentsActivity.class);
+                showStudents.putExtra("StudentID", studentID);
+                showStudents.putExtra("TutorialID", tutorialID);
+                startActivity(showStudents);
+            }
+        });
 
         studentID = (int) getIntent().getSerializableExtra("STUDENT_ID");
         firstNameText = (String) getIntent().getSerializableExtra("FNAME");
@@ -131,7 +144,6 @@ public class EditStudent extends AppCompatActivity {
                     zIDError.setError("You have not entered a valid zID.");
                 }
 
-
                 if(noError == true) {
 
                     Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
@@ -146,6 +158,7 @@ public class EditStudent extends AppCompatActivity {
                     //Have to change this so it redirects you to the new students page, or just back to the list??
                     Intent showStudentProfile = new Intent(EditStudent.this, StudentProfile.class);
                     showStudentProfile.putExtra("StudentID", studentID);
+                    showStudentProfile.putExtra("TutorialID", tutorialID);
                     startActivity(showStudentProfile);
                 }
             }

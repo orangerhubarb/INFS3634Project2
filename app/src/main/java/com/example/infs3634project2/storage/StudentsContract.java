@@ -131,6 +131,7 @@ public class StudentsContract {
                 student.setFirstName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_FNAME)));
                 student.setLastName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_LNAME)));
                 student.setStudentID(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry._ID)));
+                student.setTutorialID(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_TUTORIAL)));
                 studentList.add(student);
             }
         }
@@ -175,6 +176,7 @@ public class StudentsContract {
             student.setFirstName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_FNAME)));
             student.setLastName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_LNAME)));
             Log.d("Debug", "Name obtained");
+            student.setTutorialID(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_TUTORIAL)));
             student.setzID(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_ZID)));
             student.setYearOfDegree(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_YEAROFDEGREE)));
             student.setDegree(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_DEGREE)));

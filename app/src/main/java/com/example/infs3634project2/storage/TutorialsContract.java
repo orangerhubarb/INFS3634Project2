@@ -77,7 +77,7 @@ public class TutorialsContract {
             Tutorial tutorial = new Tutorial();
             tutorial.setName(cur.getString(cur.getColumnIndexOrThrow(TutorialEntry.COLUMN_NAME)));
             tutorial.setTutorialID(cur.getInt(cur.getColumnIndexOrThrow(TutorialEntry._ID)));
-
+            Log.d("DEBUG TUTEIDDB", String.valueOf(cur.getInt(cur.getColumnIndexOrThrow(TutorialEntry._ID))));
 
             tutorialsList.add(tutorial);
         }
