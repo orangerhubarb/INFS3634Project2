@@ -21,10 +21,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <Button
+                android:text="Edit Student"
+                android:id="@+id/editStudentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
             <TextView
                 android:id="@+id/studentName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editStudentButton"/>
 
             <TextView
                 android:id="@+id/zIDTextView"

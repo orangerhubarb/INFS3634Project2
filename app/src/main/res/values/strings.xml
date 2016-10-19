@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">INFS3634 Project 2</string>
     <string name="title_activity_test">test</string>
+    <string name="title_activity_edit_student">EditStudent</string>
 </resources>

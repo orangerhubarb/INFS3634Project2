@@ -74,6 +74,25 @@ public class StudentsContract {
         return newRowId;
     }
 
+    public void updateEditStudent(Student student, int studentID) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(StudentEntry.COLUMN_TUTORIAL, student.getTutorialID());
+        values.put(StudentEntry.COLUMN_FNAME, student.getFirstName());
+        values.put(StudentEntry.COLUMN_LNAME, student.getLastName());
+        values.put(StudentEntry.COLUMN_ZID, student.getzID());
+        values.put(StudentEntry.COLUMN_YEAROFDEGREE, student.getYearOfDegree());
+        values.put(StudentEntry.COLUMN_DEGREE, student.getDegree());
+        values.put(StudentEntry.COLUMN_GITHUBURL, student.getGithubUsername());
+        values.put(StudentEntry.COLUMN_STRENGTHS, student.getStrengths());
+        values.put(StudentEntry.COLUMN_WEAKNESSES, student.getWeaknesses());
+
+        String selection = StudentEntry._ID + " =" + studentID;
+
+        db.update(TABLE_NAME, values, selection, null);
+    }
+
     public ArrayList<Student> getStudentsList(int tutorialID) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 

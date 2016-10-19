@@ -33,6 +33,7 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
     private DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
     private StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
 
+    private Button editStudentButton;
     private TextView studentName;
     private TextView studentZID;
     private TextView studentDegree;
@@ -40,6 +41,7 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
     private TextView studentStrength;
     private TextView studentWeakness;
     private Student student;
+    private int studentID;
 
     private RecyclerView projectsRecyclerView;
     private ProjectsAdapter projectsAdapter;
@@ -63,6 +65,27 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        editStudentButton = (Button) findViewById(R.id.editStudentButton);
+        editStudentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent showEdit = new Intent(StudentProfile.this, EditStudent.class);
+                Bundle extras = new Bundle();
+                extras.putInt("STUDENT_ID", studentID);
+                extras.putString("FNAME", student.getFirstName());
+                extras.putString("LNAME", student.getLastName());
+                extras.putInt("TUTORIAL_ID", student.getTutorialID());
+                extras.putString("ZID", student.getzID());
+                extras.putInt("YEAR_OF_DEGREE", student.getYearOfDegree());
+                extras.putString("DEGREE", student.getDegree());
+                extras.putString("GITHUB_USER", student.getGithubUsername());
+                extras.putString("STRENGTHS", student.getStrengths());
+                extras.putString("WEAKNESSES", student.getWeaknesses());
+                showEdit.putExtras(extras);
+                startActivity(showEdit);
+            }
+        });
+
         studentName = (TextView) findViewById(R.id.studentName);
         studentZID = (TextView) findViewById(R.id.zIDTextView);
         studentDegree = (TextView) findViewById(R.id.degreeTextView);
@@ -73,7 +96,7 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         newTodoEntry = (EditText) findViewById(R.id.newTodoEntry);
         todoEntryButton = (Button) findViewById(R.id.todoEntryButton);
 
-        final int studentID = (int) getIntent().getSerializableExtra("StudentID");
+        studentID = (int) getIntent().getSerializableExtra("StudentID");
 
         student = studentsContract.getStudent(studentID);
 
@@ -104,6 +127,7 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
                 newTodoList.add(newEntry);
                 studentsContract.updateTodoList(newTodoList, studentID);
                 todoAdapter.notifyDataSetChanged();
+                newTodoEntry.getText().clear();
             }
         });
     }
@@ -111,18 +135,6 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
     public void recalculateTodo(List<String> todoList) {
         student.setTodoList(todoList);
     }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == android.R.id.home) {
-//            Intent showClasses = new Intent(StudentProfile.this, StudentsActivity.class);
-//            showClasses.putExtra("TutorialID", student.getTutorialID());
-//            startActivity(showClasses);
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 
     @Override
     public void onTaskCompleted(ArrayList<String> listOfProjects) {

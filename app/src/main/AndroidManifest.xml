@@ -56,6 +56,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.StudentsActivity" />
         </activity>
+        <activity
+            android:name=".views.EditStudent"
+            android:label="@string/title_activity_edit_student"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
