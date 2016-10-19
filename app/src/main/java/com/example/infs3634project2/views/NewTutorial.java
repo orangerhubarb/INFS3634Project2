@@ -1,6 +1,7 @@
 package com.example.infs3634project2.views;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,7 @@ public class NewTutorial extends AppCompatActivity {
 
     private Button confirmTutorialAddButton;
     private EditText tutorialName;
+    private TextInputLayout tutorialNameError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +35,28 @@ public class NewTutorial extends AppCompatActivity {
 
         confirmTutorialAddButton = (Button) findViewById(R.id.confirmTutorialAddButton);
         tutorialName = (EditText) findViewById(R.id.tutorialNameEditText);
+        tutorialNameError = (TextInputLayout) findViewById(R.id.tutorialNameTextInput);
 
         confirmTutorialAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Tutorial tutorial = new Tutorial(tutorialName.getText().toString());
 
-                DBOpenHelper helper = new DBOpenHelper(NewTutorial.this);
-                TutorialsContract tutorialsContract = new TutorialsContract(helper);
+                if (tutorialName.getText().toString().matches("")) {
+                    tutorialNameError.setErrorEnabled(true);
+                    tutorialNameError.setError("Please enter a valid tutorial name.");
+                }
 
-                int tutorialID = (int) tutorialsContract.insertNewTutorial(tutorial);
+                else {
+                    Tutorial tutorial = new Tutorial(tutorialName.getText().toString());
 
-                Intent showClasses = new Intent(NewTutorial.this, TutorialsActivity.class);
-                startActivity(showClasses);
+                    DBOpenHelper helper = new DBOpenHelper(NewTutorial.this);
+                    TutorialsContract tutorialsContract = new TutorialsContract(helper);
+
+                    int tutorialID = (int) tutorialsContract.insertNewTutorial(tutorial);
+
+                    Intent showClasses = new Intent(NewTutorial.this, TutorialsActivity.class);
+                    startActivity(showClasses);
+                }
             }
         });
     }

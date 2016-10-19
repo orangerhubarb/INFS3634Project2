@@ -24,7 +24,11 @@ public class NewStudent extends AppCompatActivity {
     private TextInputLayout firstNameError;
 
     private EditText lastNameEditText;
+    private TextInputLayout lastNameError;
+
     private EditText zIDEditText;
+    private TextInputLayout zIDError;
+
     //Maybe change year of degree to the scroll thing??
     private EditText yearOfDegreeEditText;
     private EditText degreeEditText;
@@ -51,7 +55,10 @@ public class NewStudent extends AppCompatActivity {
         firstNameError = (TextInputLayout) findViewById(R.id.firstNameTextInput);
 
         lastNameEditText = (EditText) findViewById(R.id.lastNameEditText);
+        lastNameError = (TextInputLayout) findViewById(R.id.lastNameTextInput);
+
         zIDEditText = (EditText) findViewById(R.id.zIDEditText);
+        zIDError = (TextInputLayout) findViewById(R.id.zIDTextInput);
 
         yearOfDegreeEditText = (EditText) findViewById(R.id.yearOfDegreeEditText);
         degreeEditText = (EditText) findViewById(R.id.degreeEditText);
@@ -67,19 +74,35 @@ public class NewStudent extends AppCompatActivity {
                 boolean noError = true;
 
                 String fName = firstNameEditText.getText().toString();
+
+                String lName = lastNameEditText.getText().toString();
+
+                String zID = zIDEditText.getText().toString();
+                String degree = degreeEditText.getText().toString();
+                int yearOfDegree = Integer.parseInt(yearOfDegreeEditText.getText().toString());
+                String githubUsername = githubUsernameEditText.getText().toString();
+
+                //Could we maybe do strengths/weaknesses after?? Just to reduce clustering of the screen
+                String strength = strengths.getText().toString();
+                String weakness = weaknesses.getText().toString();
+
                 if(fName.matches("")) {
                     firstNameError.setErrorEnabled(true);
                     firstNameError.setError("You have not provided a first name.");
                     noError = false;
                 }
 
-                String lName = lastNameEditText.getText().toString();
-                String zID = zIDEditText.getText().toString();
-                String degree = degreeEditText.getText().toString();
-                int yearOfDegree = Integer.parseInt(yearOfDegreeEditText.getText().toString());
-                String githubUsername = githubUsernameEditText.getText().toString();
-                String strength = strengths.getText().toString();
-                String weakness = weaknesses.getText().toString();
+                if(lName.matches("")) {
+                    lastNameError.setErrorEnabled(true);
+                    lastNameError.setError("You have not provided a last name.");
+                }
+
+                //Need to work out the regex here to match z followed by any 8 numbers
+                if(zID.matches("")) {
+                    zIDError.setErrorEnabled(true);
+                    zIDError.setError("You have not entered a valid zID.");
+                }
+
 
                 if(noError == true) {
 

@@ -12,19 +12,26 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_new_tutorial">
 
-    <EditText
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tutorialNameEditText"
-        android:hint="Tutorial Name"
-        android:maxLines="1"
-        android:maxLength="8"/>
+        android:id="@+id/tutorialNameTextInput">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tutorialNameEditText"
+            android:hint="Tutorial Name"
+            android:maxLines="1"
+            android:maxLength="8"/>
+    </android.support.design.widget.TextInputLayout>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/confirmTutorialAddButton"
         android:text="Add new Tutorial"
-        android:layout_below="@+id/tutorialNameEditText"/>
+        android:layout_below="@+id/tutorialNameTextInput"/>
 
 </RelativeLayout>

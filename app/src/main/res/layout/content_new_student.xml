@@ -129,7 +129,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/strengthsInputText"
+        android:id="@+id/strengthsTextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/githubUserTextInput"
@@ -148,10 +148,10 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/weaknessesInputText"
+        android:id="@+id/weaknessesTextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/strengthsInputText"
+        android:layout_below="@id/strengthsTextInput"
         android:layout_marginBottom="20dp">
 
 
@@ -172,7 +172,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/confirmStudentAddButton"
         android:text="Add new Student"
-        android:layout_below="@+id/weaknessesInputText"/>
+        android:layout_below="@+id/weaknessesTextInput"/>
 </RelativeLayout>
 
 
