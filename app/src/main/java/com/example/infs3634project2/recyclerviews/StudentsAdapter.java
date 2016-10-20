@@ -34,7 +34,6 @@ import java.util.ArrayList;
         public StudentsAdapter.StudentsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View inflatedView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.student_item_row, parent, false);
-            Log.d("Debug", "View inflated!");
 
             return new StudentsHolder(inflatedView);
         }
@@ -42,7 +41,6 @@ import java.util.ArrayList;
         @Override
         public void onBindViewHolder(StudentsHolder holder, int position) {
             Student itemStudent = mStudent.get(position);
-            Log.d("Debug", "View binded!");
             holder.bindStudent(itemStudent);
 
         }

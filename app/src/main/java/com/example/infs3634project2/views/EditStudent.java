@@ -136,26 +136,25 @@ public class EditStudent extends AppCompatActivity {
                 if(lName.matches("")) {
                     lastNameError.setErrorEnabled(true);
                     lastNameError.setError("You have not provided a last name.");
+                    noError = false;
                 }
 
                 //Need to work out the regex here to match z followed by any 8 numbers
-                if(zID.matches("")) {
+                if(zID.matches("") || !zID.matches("z[0-9]{8}")) {
                     zIDError.setErrorEnabled(true);
                     zIDError.setError("You have not entered a valid zID.");
+                    noError = false;
                 }
 
                 if(noError == true) {
 
                     Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
 
-//                    //Probably chuck in cases here in case they leave stuff blank? But first name, last name, zID is compulsory
-//
                     DBOpenHelper helper = new DBOpenHelper(EditStudent.this);
                     StudentsContract studentsContract = new StudentsContract(helper);
 
                     studentsContract.updateEditStudent(student, studentID);
 
-                    //Have to change this so it redirects you to the new students page, or just back to the list??
                     Intent showStudentProfile = new Intent(EditStudent.this, StudentProfile.class);
                     showStudentProfile.putExtra("StudentID", studentID);
                     showStudentProfile.putExtra("TutorialID", tutorialID);

@@ -65,7 +65,7 @@
             android:id="@+id/zIDEditText"
             android:hint="zID"
             android:maxLines="1"
-            android:maxLength="30" />
+            android:maxLength="9" />
 
 
     </android.support.design.widget.TextInputLayout>

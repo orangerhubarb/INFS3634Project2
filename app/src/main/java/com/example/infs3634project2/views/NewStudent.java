@@ -107,12 +107,14 @@ public class NewStudent extends AppCompatActivity {
                 if(lName.matches("")) {
                     lastNameError.setErrorEnabled(true);
                     lastNameError.setError("You have not provided a last name.");
+                    noError = false;
                 }
 
                 //Need to work out the regex here to match z followed by any 8 numbers
-                if(zID.matches("")) {
+                if(zID.matches("") || !zID.matches("z[0-9]{8}")) {
                     zIDError.setErrorEnabled(true);
                     zIDError.setError("You have not entered a valid zID.");
+                    noError = false;
                 }
 
 
