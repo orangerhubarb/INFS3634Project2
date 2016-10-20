@@ -16,6 +16,7 @@ import com.example.infs3634project2.model.Tutorial;
 import com.example.infs3634project2.storage.DBOpenHelper;
 import com.example.infs3634project2.storage.StudentsContract;
 import com.example.infs3634project2.views.StudentsActivity;
+import com.example.infs3634project2.views.TutorialsActivity;
 
 import java.util.ArrayList;
 
@@ -25,16 +26,17 @@ import java.util.ArrayList;
 public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.TutorialsHolder> {
 
     private ArrayList<Tutorial> mTutorial;
+    public TutorialsActivity tutorialsActivity;
 
-    public TutorialsAdapter(ArrayList<Tutorial> tutorialList) {
+    public TutorialsAdapter(ArrayList<Tutorial> tutorialList, TutorialsActivity tutorialsActivity) {
         this.mTutorial = tutorialList;
+        this.tutorialsActivity = tutorialsActivity;
     }
 
     @Override
     public TutorialsAdapter.TutorialsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflatedView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.tutorials_item_row, parent, false);
-        Log.d("Debug", "View inflated!");
 
         return new TutorialsHolder(inflatedView);
     }
@@ -42,7 +44,6 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
     @Override
     public void onBindViewHolder(TutorialsHolder holder, int position) {
         Tutorial itemTutorial = mTutorial.get(position);
-        Log.d("Debug", "View binded!");
         if (itemTutorial.getStudents() != null) {
             Log.d("Debug", itemTutorial.getStudents().toString());
         }
@@ -54,7 +55,7 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
         return mTutorial.size();
     }
 
-    public static class TutorialsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class TutorialsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView tutorialName;
         private Tutorial tutorialItem;
@@ -66,7 +67,6 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
         }
 
         public void bindTutorial (Tutorial tutorialItem) {
-
             this.tutorialItem = tutorialItem;
             tutorialName.setText(tutorialItem.getName());
         }
@@ -80,11 +80,11 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
             StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
 
             if (studentsContract.getStudentsList(tutorialItem.getTutorialID()) != null) {
-               showStudents.putExtra("TutorialID", tutorialItem.getTutorialID());
-                Log.d("DEBUG TADAPT TID", String.valueOf(tutorialItem.getTutorialID()));
+                Log.d("TutAdapt tutID", String.valueOf(tutorialItem.getTutorialID()));
+                tutorialsActivity.updateFragmentList(tutorialItem.getTutorialID());
             }
 
-            context.startActivity(showStudents);
+            //context.startActivity(showStudents);
         }
     }
 }

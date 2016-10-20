@@ -72,10 +72,14 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
 
             @Override
             public void onClick(View v) {
-                Intent showStudents = new Intent(StudentProfile.this, StudentsActivity.class);
-                showStudents.putExtra("TutorialID", tutorialID);
-                Log.d("DEBUG SPROFILE TID", String.valueOf(tutorialID));
-                startActivity(showStudents);
+                //Intent showStudents = new Intent(StudentProfile.this, StudentsActivity.class);
+                //showStudents.putExtra("TutorialID", tutorialID);
+                //Log.d("DEBUG SPROFILE TID", String.valueOf(tutorialID));
+                //startActivity(showStudents);
+
+                Intent backToTutorialList = new Intent(StudentProfile.this, TutorialsActivity.class);
+                backToTutorialList.putExtra("TutorialID", tutorialID);
+                startActivity(backToTutorialList);
             }
         });
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,11 +10,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".views.TutorialsActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_tutorials">
+    tools:showIn="@layout/activity_tutorials"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tutorialsRecylerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
-</RelativeLayout>
+    <fragment
+        android:id="@+id/studentListFragment"
+        android:layout_toRightOf="@id/tutorialsRecylerView"
+        android:name="com.example.infs3634project2.views.StudentListFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        />
+
+</LinearLayout>

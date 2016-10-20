@@ -63,10 +63,10 @@ public class EditStudent extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent showStudents = new Intent(EditStudent.this, StudentsActivity.class);
-                showStudents.putExtra("StudentID", studentID);
-                showStudents.putExtra("TutorialID", tutorialID);
-                startActivity(showStudents);
+                Intent backToProfile = new Intent(EditStudent.this, StudentProfile.class);
+                backToProfile.putExtra("StudentID", studentID);
+                backToProfile.putExtra("TutorialID", tutorialID);
+                startActivity(backToProfile);
             }
         });
 
