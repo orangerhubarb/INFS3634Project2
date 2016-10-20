@@ -111,12 +111,11 @@ public class NewStudent extends AppCompatActivity {
                 }
 
                 //Need to work out the regex here to match z followed by any 8 numbers
-                if(zID.matches("") || !zID.matches("z[0-9]{8}")) {
+                if(zID.matches("") || !zID.matches("z[0-9]{7}")) {
                     zIDError.setErrorEnabled(true);
                     zIDError.setError("You have not entered a valid zID.");
                     noError = false;
                 }
-
 
                 if(noError == true) {
 
@@ -130,7 +129,7 @@ public class NewStudent extends AppCompatActivity {
                     int studentID = (int) studentsContract.insertNewStudent(student);
 
                     //Have to change this so it redirects you to the new students page, or just back to the list??
-                    Intent showStudentProfile = new Intent(NewStudent.this, StudentProfile.class);
+                    Intent showStudentProfile = new Intent(NewStudent.this, StudentProfileTabs.class);
 
                     showStudentProfile.putExtra("StudentID", studentID);
                     showStudentProfile.putExtra("TutorialID", tutorialID);

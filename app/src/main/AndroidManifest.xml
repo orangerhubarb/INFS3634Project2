@@ -59,6 +59,10 @@
         <activity
             android:name=".views.EditStudent"
             android:label="@string/title_activity_edit_student"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.StudentProfileTabs"
+            android:label="@string/title_activity_student_profile_tabs"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -63,7 +63,7 @@ public class EditStudent extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent backToProfile = new Intent(EditStudent.this, StudentProfile.class);
+                Intent backToProfile = new Intent(EditStudent.this, StudentProfileTabs.class);
                 backToProfile.putExtra("StudentID", studentID);
                 backToProfile.putExtra("TutorialID", tutorialID);
                 startActivity(backToProfile);
@@ -155,7 +155,7 @@ public class EditStudent extends AppCompatActivity {
 
                     studentsContract.updateEditStudent(student, studentID);
 
-                    Intent showStudentProfile = new Intent(EditStudent.this, StudentProfile.class);
+                    Intent showStudentProfile = new Intent(EditStudent.this, StudentProfileTabs.class);
                     showStudentProfile.putExtra("StudentID", studentID);
                     showStudentProfile.putExtra("TutorialID", tutorialID);
                     startActivity(showStudentProfile);

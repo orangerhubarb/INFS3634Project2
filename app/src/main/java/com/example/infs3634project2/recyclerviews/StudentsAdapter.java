@@ -14,6 +14,7 @@ import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
 import com.example.infs3634project2.views.StudentProfile;
+import com.example.infs3634project2.views.StudentProfileTabs;
 import com.example.infs3634project2.views.StudentsActivity;
 
 import java.util.ArrayList;
@@ -57,11 +58,8 @@ import java.util.ArrayList;
 
             public StudentsHolder(View itemView) {
                 super(itemView);
-
                 studentName = (TextView) itemView.findViewById(R.id.student_name);
-
                 itemView.setOnClickListener(this);
-
             }
 
             public void bindStudent (Student studentItem) {
@@ -74,7 +72,7 @@ import java.util.ArrayList;
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent showProfile = new Intent(context, StudentProfile.class);
+                Intent showProfile = new Intent(context, StudentProfileTabs.class);
                 showProfile.putExtra("StudentID", studentItem.getStudentID());
                 showProfile.putExtra("TutorialID", studentItem.getTutorialID());
                 Log.d("DEBUG SADAPT SID TID", String.valueOf(studentItem.getStudentID()) + " " + String.valueOf(studentItem.getTutorialID()));

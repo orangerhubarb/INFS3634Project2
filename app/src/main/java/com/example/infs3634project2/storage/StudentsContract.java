@@ -202,20 +202,24 @@ public class StudentsContract {
 
     //Converts a String array to string to store it
     public static String convertArrayToString(List<String> array) {
-        String stringArray = null;
-        for(String item : array) {
-            stringArray += item;
+        if(array != null) {
+            String stringArray = null;
+            for(String item : array) {
+                stringArray += item;
 
-            if(array.indexOf(item) != array.size()-1) {
-                stringArray += ", ";
+                if(array.indexOf(item) != array.size()-1) {
+                    stringArray += ", ";
+                }
             }
+            return stringArray;
+        } else {
+            return null;
         }
-        return stringArray;
     }
 
     //Converts the string back to a String Array
     public static List<String> convertStringToArray(String string) {
-        if(string == null) {
+        if(string == null || string.equals("null")) {
             List<String> blankArray = new ArrayList<>();
             return blankArray;
         } else {

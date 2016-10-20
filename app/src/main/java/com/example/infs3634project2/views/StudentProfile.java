@@ -33,17 +33,18 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
 
     private DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
     private StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
+    private Student student;
 
     private Button editStudentButton;
     private TextView studentName;
+
     private TextView studentZID;
     private TextView studentDegree;
     private TextView studentYear;
+    //fragment
+
     private TextView studentStrength;
     private TextView studentWeakness;
-    private Student student;
-    private int studentID;
-
     private RecyclerView projectsRecyclerView;
     private ProjectsAdapter projectsAdapter;
     private LinearLayoutManager projectsLinearLayoutManager;
@@ -51,12 +52,13 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
     private RecyclerView todoRecyclerView;
     private TodoAdapter todoAdapter;
     private LinearLayoutManager todoLinearLayoutManager;
-
     private List<String> newTodoList;
     private EditText newTodoEntry;
     private Button todoEntryButton;
+
     private ImageButton backButton;
 
+    private int studentID;
     private int tutorialID;
 
     @Override
@@ -67,6 +69,8 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         toolbar.setTitle("Student");
         setSupportActionBar(toolbar);
 
+
+        //not moved yet
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
 
@@ -112,9 +116,11 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         studentZID = (TextView) findViewById(R.id.zIDTextView);
         studentDegree = (TextView) findViewById(R.id.degreeTextView);
         studentYear = (TextView) findViewById(R.id.yearOfDegreeTextView);
+
         studentStrength = (TextView) findViewById(R.id.strengthsTextView);
         studentWeakness = (TextView) findViewById(R.id.weaknessesTextView);
 
+        //fragment 3
         newTodoEntry = (EditText) findViewById(R.id.newTodoEntry);
         todoEntryButton = (Button) findViewById(R.id.todoEntryButton);
 
@@ -127,6 +133,8 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         studentStrength.setText(student.getStrengths());
         studentWeakness.setText(student.getWeaknesses());
 
+        //fragments
+
         String githubUser = student.getGithubUsername();
         GitHubDataProvider gitHubDataProvider = new GitHubDataProvider(this);
         gitHubDataProvider.getGitProject(githubUser, this);
@@ -134,7 +142,7 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         newTodoList = student.getTodoList();
 
         todoRecyclerView = (RecyclerView) findViewById(R.id.todoRecyclerView);
-        todoAdapter =  new TodoAdapter(newTodoList, this, studentID);
+//        todoAdapter =  new TodoAdapter(newTodoList, this, studentID);
         todoRecyclerView.setAdapter(todoAdapter);
         todoLinearLayoutManager = new LinearLayoutManager(this);
         todoRecyclerView.setLayoutManager(todoLinearLayoutManager);
@@ -152,9 +160,6 @@ public class StudentProfile extends AppCompatActivity implements GitHubCallback<
         });
     }
 
-    public void recalculateTodo(List<String> todoList) {
-        student.setTodoList(todoList);
-    }
 
     @Override
     public void onTaskCompleted(ArrayList<String> listOfProjects) {

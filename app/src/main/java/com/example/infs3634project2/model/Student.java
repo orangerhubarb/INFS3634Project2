@@ -19,7 +19,7 @@ public class Student implements Serializable {
     private String strengths;
     private String weaknesses;
 
-    private List<String> todoList = new ArrayList<>();
+    private List<String> todoList;
 
     public Student() {
 

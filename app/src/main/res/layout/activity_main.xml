@@ -15,4 +15,11 @@
     android:text="Press me to continue!!!"
     android:id="@+id/continueButton"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press me to continue to student profile!!!"
+        android:id="@+id/testButton"
+        android:layout_below="@+id/continueButton"/>
+
 </RelativeLayout>
