@@ -54,9 +54,9 @@ public class NewStudent extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent showStudents = new Intent(NewStudent.this, StudentsActivity.class);
-                showStudents.putExtra("TutorialID", tutorialID);
-                startActivity(showStudents);
+                Intent backToTutorialList = new Intent(NewStudent.this, TutorialsActivity.class);
+                backToTutorialList.putExtra("TutorialID", tutorialID);
+                startActivity(backToTutorialList);
             }
         });
 

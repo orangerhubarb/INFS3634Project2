@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
@@ -61,9 +62,16 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
             @Override
             public void onClick(View v) {
                 Intent newStudent = new Intent(TutorialsActivity.this, NewStudent.class);
-                newStudent.putExtra("TutorialID", currentTutorialID);
-                Log.d("StartingNewStudent", String.valueOf(currentTutorialID));
-                startActivity(newStudent);
+
+                if(currentTutorialID != 0) {
+                    newStudent.putExtra("TutorialID", currentTutorialID);
+                    Log.d("StartingNewStudent", String.valueOf(currentTutorialID));
+                    startActivity(newStudent);
+                }
+                else {
+                    Toast.makeText(TutorialsActivity.this, "You have not selected a Tutorial",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
