@@ -160,12 +160,24 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/studentPictureEdit"
+            android:layout_below="@id/weaknessesTextInput"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/takePhoto"
+            android:layout_below="@+id/studentPictureEdit"
+            android:text="Take a new photo!"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/confirmStudentSaveButton"
             android:text="Save Changes"
-            android:layout_below="@+id/weaknessesTextInput"/>
+            android:layout_below="@+id/takePhoto"/>
     </RelativeLayout>
 
 </ScrollView>

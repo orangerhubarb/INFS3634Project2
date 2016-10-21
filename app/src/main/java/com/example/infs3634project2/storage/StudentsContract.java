@@ -4,11 +4,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.infs3634project2.model.Student;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +35,8 @@ public class StudentsContract {
                     StudentEntry.COLUMN_GITHUBURL + " TEXT," +
                     StudentEntry.COLUMN_STRENGTHS + " TEXT," +
                     StudentEntry.COLUMN_WEAKNESSES + " TEXT," +
-                    StudentEntry.COLUMN_TODO + " TEXT" + ")";
+                    StudentEntry.COLUMN_TODO + " TEXT," +
+                    StudentEntry.COLUMN_STUDENT_PICTURE + " BLOB" + ")";
 
     public StudentsContract(SQLiteOpenHelper dbHelper) {
         this.dbHelper = dbHelper;
@@ -50,6 +54,7 @@ public class StudentsContract {
         public static final String COLUMN_STRENGTHS = "strengths";
         public static final String COLUMN_WEAKNESSES = "weaknesses";
         public static final String COLUMN_TODO = "todo";
+        public static final String COLUMN_STUDENT_PICTURE = "studentpicture";
 
     }
 
@@ -66,7 +71,7 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_GITHUBURL, student.getGithubUsername());
         values.put(StudentEntry.COLUMN_STRENGTHS, student.getStrengths());
         values.put(StudentEntry.COLUMN_WEAKNESSES, student.getWeaknesses());
-        values.put(StudentEntry.COLUMN_TODO, convertArrayToString(student.getTodoList()));
+
 
         long newRowId;
         newRowId = db.insert(TABLE_NAME, null, values);
@@ -87,6 +92,11 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_GITHUBURL, student.getGithubUsername());
         values.put(StudentEntry.COLUMN_STRENGTHS, student.getStrengths());
         values.put(StudentEntry.COLUMN_WEAKNESSES, student.getWeaknesses());
+
+        if(student.getStudentPicture() != null) {
+            byte[] studentImage = getBitmapAsByteArray(student.getStudentPicture());
+            values.put(StudentEntry.COLUMN_STUDENT_PICTURE, studentImage);
+        }
 
         String selection = StudentEntry._ID + " =" + studentID;
 
@@ -157,7 +167,8 @@ public class StudentsContract {
                 StudentEntry.COLUMN_GITHUBURL,
                 StudentEntry.COLUMN_STRENGTHS,
                 StudentEntry.COLUMN_WEAKNESSES,
-                StudentEntry.COLUMN_TODO
+                StudentEntry.COLUMN_TODO,
+                StudentEntry.COLUMN_STUDENT_PICTURE
         };
 
         Cursor cur = db.query(
@@ -184,6 +195,12 @@ public class StudentsContract {
             student.setStrengths(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_STRENGTHS)));
             student.setWeaknesses(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_WEAKNESSES)));
             student.setTodoList(convertStringToArray(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_TODO))));
+
+            if(cur.getBlob(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_STUDENT_PICTURE)) != null) {
+                byte[] studentPicture = cur.getBlob(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_STUDENT_PICTURE));
+                student.setStudentPicture(BitmapFactory.decodeByteArray(studentPicture, 0, studentPicture.length));
+
+            }
         }
 
         cur.close();
@@ -227,5 +244,10 @@ public class StudentsContract {
             List<String> array = new ArrayList<>(Arrays.asList(string.split("\\s*,\\s*")));
             return array;
         }
+    }
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
     }
 }

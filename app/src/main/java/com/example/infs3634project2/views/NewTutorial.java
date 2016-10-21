@@ -55,7 +55,7 @@ public class NewTutorial extends AppCompatActivity {
                     int tutorialID = (int) tutorialsContract.insertNewTutorial(tutorial);
 
                     Intent showClasses = new Intent(NewTutorial.this, TutorialsActivity.class);
-                    showClasses.putExtra("TUTORIAL_ID", tutorialID);
+                    showClasses.putExtra("TutorialID", tutorialID);
                     startActivity(showClasses);
                 }
             }

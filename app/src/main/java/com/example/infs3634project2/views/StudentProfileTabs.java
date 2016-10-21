@@ -1,6 +1,8 @@
 package com.example.infs3634project2.views;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.infs3634project2.R;
@@ -22,6 +25,7 @@ import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.storage.DBOpenHelper;
 import com.example.infs3634project2.storage.StudentsContract;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +43,8 @@ public class StudentProfileTabs extends AppCompatActivity {
 
     private int studentID;
     private int tutorialID;
+
+    private ImageView studentPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +78,12 @@ public class StudentProfileTabs extends AppCompatActivity {
                 extras.putString("GITHUB_USER", student.getGithubUsername());
                 extras.putString("STRENGTHS", student.getStrengths());
                 extras.putString("WEAKNESSES", student.getWeaknesses());
+
+                if(student.getStudentPicture() != null) {
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    student.getStudentPicture().compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+                    showEdit.putExtra("STUDENT_PICTURE", outputStream.toByteArray());
+                }
                 showEdit.putExtras(extras);
                 startActivity(showEdit);
             }
@@ -79,6 +91,12 @@ public class StudentProfileTabs extends AppCompatActivity {
 
         studentName = (TextView) findViewById(R.id.studentName);
         studentName.setText(student.getFirstName() + " " + student.getLastName());
+        studentPicture = (ImageView) findViewById(R.id.studentPictureProfile);
+
+
+        if(student.getStudentPicture() != null) {
+            studentPicture.setImageBitmap(student.getStudentPicture());
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {

@@ -1,7 +1,10 @@
 package com.example.infs3634project2.views;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -12,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
@@ -35,6 +40,7 @@ public class EditStudent extends AppCompatActivity {
     private EditText githubUsernameEditText;
     private EditText strengths;
     private EditText weaknesses;
+    private ImageView studentPictureEdit;
     private Button confirmStudentSaveButton;
 
     private String firstNameText;
@@ -47,6 +53,11 @@ public class EditStudent extends AppCompatActivity {
     private String weaknessesText;
     private int tutorialID;
     private int studentID;
+
+    private byte[] studentPictureByteArray;
+    private Bitmap studentPictureBitmap;
+    protected static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
+    private Button takeNewPhoto;
 
     private ImageButton backButton;
 
@@ -81,6 +92,16 @@ public class EditStudent extends AppCompatActivity {
         weaknessesText = (String) getIntent().getSerializableExtra("WEAKNESSES");
         tutorialID = (int) getIntent().getSerializableExtra("TUTORIAL_ID");
 
+        studentPictureEdit = (ImageView) findViewById(R.id.studentPictureEdit);
+        takeNewPhoto = (Button) findViewById(R.id.takePhoto);
+
+        if (getIntent().hasExtra("STUDENT_PICTURE")) {
+            studentPictureByteArray = getIntent().getByteArrayExtra("STUDENT_PICTURE");
+            studentPictureBitmap = BitmapFactory.decodeByteArray(studentPictureByteArray, 0, studentPictureByteArray.length);
+            studentPictureEdit.setImageBitmap(studentPictureBitmap);
+
+        }
+
         Log.d("STUDENT DETAILS DEBUG", firstNameText + lastNameText + zIDText + yearOfDegreeText + degreeText + githubUsernameText + strengthsText + weaknessesText + tutorialID);
 
         firstNameEditText = (EditText) findViewById(R.id.firstNameEditText);
@@ -105,6 +126,15 @@ public class EditStudent extends AppCompatActivity {
         strengths.setText(strengthsText);
         weaknesses = (EditText) findViewById(R.id.weaknessesEditText);
         weaknesses.setText(weaknessesText);
+
+        takeNewPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                Log.d("IMAGE", "IMAGE SNAPPED");
+            }
+        });
 
         confirmStudentSaveButton = (Button) findViewById(R.id.confirmStudentSaveButton);
 
@@ -140,7 +170,7 @@ public class EditStudent extends AppCompatActivity {
                 }
 
                 //Need to work out the regex here to match z followed by any 8 numbers
-                if(zID.matches("") || !zID.matches("z[0-9]{8}")) {
+                if(zID.matches("") || !zID.matches("z[0-9]{7}")) {
                     zIDError.setErrorEnabled(true);
                     zIDError.setError("You have not entered a valid zID.");
                     noError = false;
@@ -149,6 +179,9 @@ public class EditStudent extends AppCompatActivity {
                 if(noError == true) {
 
                     Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
+                    if(studentPictureBitmap != null) {
+                        student.setStudentPicture(studentPictureBitmap);
+                    }
 
                     DBOpenHelper helper = new DBOpenHelper(EditStudent.this);
                     StudentsContract studentsContract = new StudentsContract(helper);
@@ -162,6 +195,33 @@ public class EditStudent extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+
+                //use imageUri here to access the image
+
+                Bundle extras = data.getExtras();
+
+                studentPictureBitmap = (Bitmap) extras.get("data");
+
+                studentPictureEdit.setImageBitmap(studentPictureBitmap);
+
+
+                // here you will get the image as bitmap
+
+
+            }
+            else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Picture was not taken", Toast.LENGTH_SHORT);
+            }
+        }
+
+
     }
 
 }

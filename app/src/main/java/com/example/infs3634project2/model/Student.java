@@ -1,5 +1,7 @@
 package com.example.infs3634project2.model;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Student implements Serializable {
     private String githubUsername;
     private String strengths;
     private String weaknesses;
+    private Bitmap studentPicture;
 
     private List<String> todoList;
 
@@ -128,5 +131,11 @@ public class Student implements Serializable {
         this.lastName = lastName;
     }
 
+    public Bitmap getStudentPicture() {
+        return studentPicture;
+    }
 
+    public void setStudentPicture(Bitmap studentPicture) {
+        this.studentPicture = studentPicture;
+    }
 }
