@@ -34,6 +34,7 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
     private ProjectsAdapter projectsAdapter;
     private LinearLayoutManager projectsLinearLayoutManager;
     private Student mStudent;
+    private TextView invalidUsername;
 
     public FragmentTwo() {
     }
@@ -50,6 +51,7 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
         View view = inflater.inflate(R.layout.fragment_fragment_two, container, false);
 
         mStudent = ((StudentProfileTabs) this.getActivity()).getStudent();
+        invalidUsername = (TextView) view.findViewById(R.id.invalidUsernameError);
 
         studentStrength = (TextView) view.findViewById(R.id.strengthsTextView);
         studentWeakness = (TextView) view.findViewById(R.id.weaknessesTextView);
@@ -58,9 +60,11 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
         studentStrength.setText(mStudent.getStrengths());
         studentWeakness.setText(mStudent.getWeaknesses());
 
-        String githubUser = mStudent.getGithubUsername();
-        GitHubDataProvider gitHubDataProvider = new GitHubDataProvider(this.getContext());
-        gitHubDataProvider.getGitProject(githubUser, this);
+        if(mStudent.getGithubUsername() != null && !mStudent.getGithubUsername().equals("")) {
+            String githubUser = mStudent.getGithubUsername();
+            GitHubDataProvider gitHubDataProvider = new GitHubDataProvider(this.getContext());
+            gitHubDataProvider.getGitProject(githubUser, this);
+        }
 
         return view;
     }
@@ -76,11 +80,12 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
 
         projectsLinearLayoutManager = new LinearLayoutManager(this.getContext());
         projectsRecyclerView.setLayoutManager(projectsLinearLayoutManager);
+        invalidUsername.setText("");
         Log.d("Student List Return", listOfProjects.toString());
     }
 
     @Override
     public void onFailure(String fail) {
-
+        invalidUsername.setText("You have entered an invalid Github username.");
     }
 }

@@ -3,6 +3,8 @@ package com.example.infs3634project2.Data;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,10 +14,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.infs3634project2.model.Projects;
+import com.example.infs3634project2.views.TutorialsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -73,6 +77,7 @@ public class GitHubDataProvider{
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley", "Error");
                         error.printStackTrace();
+                        callback.onFailure("Fail");
                     }
                 }
         );
