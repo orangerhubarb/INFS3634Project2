@@ -64,8 +64,14 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
             username.setText(mStudent.getGithubUsername());
         }
 
-        studentStrength.setText(mStudent.getStrengths());
-        studentWeakness.setText(mStudent.getWeaknesses());
+        if (mStudent.getStrengths() != null && !mStudent.getStrengths().trim().isEmpty()) {
+            studentStrength.setText(mStudent.getStrengths());
+            Log.d("StrengthsSet", mStudent.getStrengths());
+        }
+
+        if (mStudent.getWeaknesses() != null && !mStudent.getWeaknesses().trim().isEmpty()) {
+            studentWeakness.setText(mStudent.getWeaknesses());
+        }
 
         if(mStudent.getGithubUsername() != null && !mStudent.getGithubUsername().equals("")) {
             String githubUser = mStudent.getGithubUsername();

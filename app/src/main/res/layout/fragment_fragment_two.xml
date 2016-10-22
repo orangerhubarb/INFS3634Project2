@@ -11,25 +11,43 @@
         android:text="Student Skills"
         android:textSize="40dp"
         android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Strengths"
+        android:id="@+id/strengthsLabel"
+        android:layout_below="@id/studentSkills"/>
 
     <TextView
         android:id="@+id/strengthsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/studentSkills" />
+        android:layout_below="@+id/strengthsLabel"
+        android:text="You have not entered any strengths for this student."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weaknesses"
+        android:id="@+id/weaknessesLabel"
+        android:layout_below="@id/strengthsTextView"
+        android:layout_marginTop="10dp"/>
+
 
     <TextView
         android:id="@+id/weaknessesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/strengthsTextView" />
+        android:layout_below="@+id/weaknessesLabel"
+        android:text="You have not entered any weaknesses for this student."/>
 
     <TextView
         android:id="@+id/githubUserTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/weaknessesTextView"
-        android:text="GitHub Projects" />
+        android:text="GitHub Projects"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"

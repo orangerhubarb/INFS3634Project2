@@ -13,7 +13,7 @@
     tools:showIn="@layout/activity_new_tutorial">
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/tutorialNameTextInput">
 
@@ -30,8 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/classTimeLabel"
-        android:layout_below="@id/firstNameEditText"
-        android:text="Class Time"/>
+        android:layout_below="@id/tutorialNameTextInput"
+        android:text="Class Time"
+        android:layout_marginTop="15dp"/>
 
     <LinearLayout
         android:id="@+id/classStartEnd"
@@ -55,7 +56,7 @@
             android:layout_width="wrap_content"
             android:id="@+id/StarttoEndTextView"
             android:layout_height="wrap_content"
-            android:text=" to " />
+            android:text="    to    " />
 
         <Spinner
             android:layout_width="wrap_content"
@@ -73,11 +74,18 @@
     </LinearLayout>
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tutorial Day"
+        android:layout_below="@id/classStartEnd"
+        android:id="@+id/tutorialDayLabel"
+        android:layout_marginTop="15dp"/>
     <Spinner
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/day_spinner"
-        android:layout_below="@id/classStartEnd">
+        android:layout_below="@id/tutorialDayLabel">
     </Spinner>
 
     <Button
@@ -85,6 +93,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/confirmTutorialAddButton"
         android:text="Add new Tutorial"
-        android:layout_below="@+id/day_spinner"/>
+        android:layout_below="@+id/day_spinner"
+        android:layout_marginTop="15dp"/>
 
 </RelativeLayout>

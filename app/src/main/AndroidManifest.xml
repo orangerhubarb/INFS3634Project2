@@ -56,7 +56,8 @@
         <activity
             android:name=".views.StudentProfileTabs"
             android:label="@string/title_activity_student_profile_tabs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
     <uses-feature android:name="android.hardware.camera"

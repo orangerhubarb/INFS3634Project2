@@ -98,7 +98,7 @@
             android:id="@+id/degreeEditText"
             android:hint="Degree"
             android:maxLines="1"
-            android:maxLength="30" />
+            android:maxLength="70" />
 
 
     </android.support.design.widget.TextInputLayout>
@@ -136,8 +136,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/strengthsEditText"
             android:hint="Strengths"
-            android:maxLines="1"
-            android:maxLength="30" />
+            android:maxLines="50"
+            android:maxLength="600" />
 
 
     </android.support.design.widget.TextInputLayout>
@@ -155,8 +155,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/weaknessesEditText"
             android:hint="Weaknesses"
-            android:maxLines="1"
-            android:maxLength="30" />
+            android:maxLines="50"
+            android:maxLength="600" />
 
 
     </android.support.design.widget.TextInputLayout>
@@ -194,7 +194,7 @@
             android:id="@+id/emailEditText"
             android:hint="E-Mail"
             android:maxLines="1"
-            android:maxLength="30" />
+            android:maxLength="50" />
 
 
     </android.support.design.widget.TextInputLayout>
