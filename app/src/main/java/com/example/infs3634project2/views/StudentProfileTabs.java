@@ -1,9 +1,14 @@
 package com.example.infs3634project2.views;
 
+import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -20,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
@@ -45,8 +51,12 @@ public class StudentProfileTabs extends AppCompatActivity {
     private int tutorialID;
 
     private ImageView studentPicture;
+    private Bitmap studentPictureBitmap;
     private TextView studentName;
     private ImageButton backButton;
+    private ImageButton takePhoto;
+
+    protected static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +127,83 @@ public class StudentProfileTabs extends AppCompatActivity {
         if(student.getStudentPicture() != null) {
             studentPicture.setImageBitmap(student.getStudentPicture());
         }
+
+        takePhoto = (ImageButton) findViewById(R.id.takephotoImageButton);
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (checkSelfPermission(Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    requestPermissions(new String[]{Manifest.permission.CAMERA},
+                            CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE);
+                }
+
+                else {
+                    Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE);
+                    Log.d("IMAGE", "IMAGE SNAPPED");
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE);
+                Log.d("IMAGE", "IMAGE SNAPPED");
+
+            }
+            else {
+
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE) {
+
+                //use imageUri here to access the image
+
+                Bundle extras = data.getExtras();
+
+                studentPictureBitmap = (Bitmap) extras.get("data");
+
+                studentPicture.setImageBitmap(studentPictureBitmap);
+                student.setStudentPicture(studentPictureBitmap);
+
+
+                SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+                ContentValues cv = new ContentValues();
+
+                byte[] img = studentsContract.getBitmapAsByteArray(student.getStudentPicture());
+                cv.put("studentpicture", img);
+
+                Log.d("Debug", "Content Values put method has been used");
+
+                db.update("students", cv, "_id=" + student.getStudentID(), null);
+                Log.d("Debug", "Successfully added studentpicture");
+                db.close();
+
+
+            }
+            else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Picture was not taken", Toast.LENGTH_SHORT);
+            }
+        }
+
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
