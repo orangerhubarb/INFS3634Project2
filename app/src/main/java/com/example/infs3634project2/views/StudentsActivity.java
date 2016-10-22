@@ -35,8 +35,7 @@ public class StudentsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Students");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         tutorialID = (int) getIntent().getSerializableExtra("TutorialID");
         Log.d("DEBUG SACTIVITY SER TID", String.valueOf(tutorialID));

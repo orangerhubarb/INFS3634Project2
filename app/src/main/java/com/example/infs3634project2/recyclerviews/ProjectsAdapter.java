@@ -11,9 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infs3634project2.R;
+import com.example.infs3634project2.model.Projects;
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
-import com.example.infs3634project2.views.StudentProfile;
 import com.example.infs3634project2.views.StudentsActivity;
 
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ import java.util.ArrayList;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ProjectsHolder> {
 
-    private ArrayList<String> projects;
+    private ArrayList<Projects> projects;
 
-    public ProjectsAdapter(ArrayList<String> projects) {
+    public ProjectsAdapter(ArrayList<Projects> projects) {
         this.projects = projects;
     }
 
@@ -41,7 +41,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
 
     @Override
     public void onBindViewHolder(ProjectsHolder holder, int position) {
-        String project = projects.get(position);
+        Projects project = projects.get(position);
         Log.d("Debug", "View binded!");
         holder.bindProject(project);
     }
@@ -54,18 +54,23 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
     public static class ProjectsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 //
         private TextView projectName;
+        private TextView createdDate;
+        private TextView updatedDate;
 
         public ProjectsHolder(View itemView) {
             super(itemView);
 
             projectName = (TextView) itemView.findViewById(R.id.project_name);
+            createdDate = (TextView) itemView.findViewById(R.id.created_date);
+            updatedDate = (TextView) itemView.findViewById(R.id.updated_date);
 
             itemView.setOnClickListener(this);
-
         }
 
-        public void bindProject(String project) {
-            projectName.setText(project);
+        public void bindProject(Projects projectObject) {
+            projectName.setText(projectObject.getProjectName());
+            createdDate.setText(projectObject.getCreatedDate());
+            updatedDate.setText(projectObject.getUpdatedDate());
         }
 
         @Override

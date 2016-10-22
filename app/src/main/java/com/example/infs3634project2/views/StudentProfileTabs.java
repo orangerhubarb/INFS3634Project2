@@ -52,6 +52,7 @@ public class StudentProfileTabs extends AppCompatActivity {
         setContentView(R.layout.activity_student_profile_tabs);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);

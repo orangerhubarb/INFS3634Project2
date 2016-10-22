@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.example.infs3634project2.R;
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
-import com.example.infs3634project2.views.StudentProfile;
 import com.example.infs3634project2.views.StudentProfileTabs;
 import com.example.infs3634project2.views.StudentsActivity;
 

@@ -50,6 +50,7 @@ public class NewStudent extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("New Student");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {

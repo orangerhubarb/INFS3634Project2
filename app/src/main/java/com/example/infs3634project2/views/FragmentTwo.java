@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.infs3634project2.Data.GitHubCallback;
 import com.example.infs3634project2.Data.GitHubDataProvider;
 import com.example.infs3634project2.R;
+import com.example.infs3634project2.model.Projects;
 import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.recyclerviews.ProjectsAdapter;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
  * Activities that contain this fragment must implement the
  * to handle interaction events.
  */
-public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<String>> {
+public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Projects>> {
 
     private TextView studentStrength;
     private TextView studentWeakness;
@@ -64,8 +65,9 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<St
         return view;
     }
 
+
     @Override
-    public void onTaskCompleted(ArrayList<String> listOfProjects) {
+    public void onTaskCompleted(ArrayList<Projects> listOfProjects) {
         Log.d("Debug", "URL has been passed");
         //Obviously after this has been obtained, then we set all the layout shit.
 

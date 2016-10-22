@@ -18,7 +18,6 @@ import com.example.infs3634project2.model.Tutorial;
 import com.example.infs3634project2.storage.DBOpenHelper;
 import com.example.infs3634project2.storage.StudentsContract;
 import com.example.infs3634project2.views.FragmentThree;
-import com.example.infs3634project2.views.StudentProfile;
 import com.example.infs3634project2.views.StudentProfileTabs;
 import com.example.infs3634project2.views.StudentsActivity;
 

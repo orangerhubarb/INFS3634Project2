@@ -72,7 +72,7 @@ public class EditStudent extends AppCompatActivity {
         setContentView(R.layout.activity_edit_student);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Edit Student");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -129,8 +129,6 @@ public class EditStudent extends AppCompatActivity {
 
         int spinnerPosition = yearOfDegreeAdapter.getPosition(String.valueOf(yearOfDegreeText));
         yearOfDegreeSpinner.setSelection(spinnerPosition);
-
-
 
         degreeEditText = (EditText) findViewById(R.id.degreeEditText);
         degreeEditText.setText(degreeText);

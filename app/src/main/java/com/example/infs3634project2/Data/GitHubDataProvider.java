@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.infs3634project2.model.Projects;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,13 +26,14 @@ import java.util.ArrayList;
 public class GitHubDataProvider{
 
     private Context context;
-    ArrayList<String> listOfProjects = new ArrayList<>();
+    ArrayList<Projects> listOfProjects = new ArrayList<>();
 
     public GitHubDataProvider(Context context) {
         this.context = context;
     }
 
-    public void getGitProject(final String username, final GitHubCallback<ArrayList<String>> callback) {
+    public void getGitProject(final String username, final GitHubCallback<ArrayList<Projects>> callback) {
+
         Log.d("Debug", username);
         String apiURL = "https://api.github.com/users/" + username + "/repos";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -47,7 +49,13 @@ public class GitHubDataProvider{
 
                             for(int i = 0 ; i < response.length() ; i++) {
                                 JSONObject currentProject = response.getJSONObject(i);
-                                listOfProjects.add(currentProject.getString("name"));
+                                String name = currentProject.getString("name");
+                                String url = currentProject.getString("svn_url");
+                                String createdDate = currentProject.getString("created_at");
+                                String updatedDate = currentProject.getString("updated_at");
+
+                                Projects project = new Projects(name, url, createdDate, updatedDate);
+                                listOfProjects.add(project);
                             }
 
                         } catch (JSONException e) {

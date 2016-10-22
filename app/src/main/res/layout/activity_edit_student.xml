@@ -23,7 +23,12 @@
                 android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_previous"/>
+                android:src="@drawable/ic_action_name"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Student"/>
 
             </android.support.v7.widget.Toolbar>
 
