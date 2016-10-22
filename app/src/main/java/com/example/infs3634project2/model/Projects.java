@@ -54,7 +54,7 @@ public class Projects {
     }
 
     public String getFormattedDate(String date) {
-        String formatDate = date.replace("T", " ").replace("Z", " ");
+        String formatDate = date.substring(0, 10);
         return formatDate;
     }
 
