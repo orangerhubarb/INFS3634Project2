@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class StudentProfileTabs extends AppCompatActivity {
     private int tutorialID;
 
     private ImageView studentPicture;
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,22 @@ public class StudentProfileTabs extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent showStudents = new Intent(StudentProfileTabs.this, StudentsActivity.class);
+                showStudents.putExtra("TutorialID", tutorialID);
+                Log.d("DEBUG SPROFILE TID", String.valueOf(tutorialID));
+                startActivity(showStudents);
+
+                Intent backToTutorialList = new Intent(StudentProfileTabs.this, TutorialsActivity.class);
+                backToTutorialList.putExtra("TutorialID", tutorialID);
+                startActivity(backToTutorialList);
+            }
+        });
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
