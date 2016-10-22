@@ -60,7 +60,7 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
         projectsRecyclerView = (RecyclerView) view.findViewById(R.id.projectsRecyclerView);
 
         username = (TextView) view.findViewById(R.id.username);
-        if(mStudent.getGithubUsername() != null || !mStudent.getGithubUsername().equals("")) {
+        if(mStudent.getGithubUsername() != null && !mStudent.getGithubUsername().isEmpty()) {
             username.setText(mStudent.getGithubUsername());
         }
 
@@ -73,7 +73,7 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
             studentWeakness.setText(mStudent.getWeaknesses());
         }
 
-        if(mStudent.getGithubUsername() != null && !mStudent.getGithubUsername().equals("")) {
+        if(mStudent.getGithubUsername() != null && !mStudent.getGithubUsername().isEmpty()) {
             String githubUser = mStudent.getGithubUsername();
             GitHubDataProvider gitHubDataProvider = new GitHubDataProvider(this.getContext());
             gitHubDataProvider.getGitProject(githubUser, this);
