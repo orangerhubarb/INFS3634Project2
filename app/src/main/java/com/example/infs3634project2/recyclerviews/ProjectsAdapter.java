@@ -2,6 +2,7 @@ package com.example.infs3634project2.recyclerviews;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,26 +57,32 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
         private TextView projectName;
         private TextView createdDate;
         private TextView updatedDate;
+        private Projects project;
 
         public ProjectsHolder(View itemView) {
             super(itemView);
-
             projectName = (TextView) itemView.findViewById(R.id.project_name);
             createdDate = (TextView) itemView.findViewById(R.id.created_date);
             updatedDate = (TextView) itemView.findViewById(R.id.updated_date);
-
             itemView.setOnClickListener(this);
         }
 
         public void bindProject(Projects projectObject) {
+            project = projectObject;
             projectName.setText(projectObject.getProjectName());
-            createdDate.setText(projectObject.getCreatedDate());
-            updatedDate.setText(projectObject.getUpdatedDate());
+            String createDateRaw = projectObject.getCreatedDate();
+            createdDate.setText(projectObject.getFormattedDate(createDateRaw));
+            String updateDateRaw = projectObject.getUpdatedDate();
+            updatedDate.setText(projectObject.getFormattedDate(updateDateRaw));
         }
 
         @Override
         public void onClick(View v) {
-
+            Context context = v.getContext();
+            String url = project.getUrl();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            context.startActivity(intent);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.infs3634project2.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -50,6 +51,11 @@ public class Projects {
 
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public String getFormattedDate(String date) {
+        String formatDate = date.replace("T", " ").replace("Z", " ");
+        return formatDate;
     }
 
 }

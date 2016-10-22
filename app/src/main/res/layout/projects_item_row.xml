@@ -10,7 +10,17 @@
         android:layout_height="wrap_content"
         android:text="DEFAULT LOL"
         android:layout_marginLeft="8dp"
-        android:textSize="18sp"/>
+        android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/created_date_label"
+        android:text="Date Created: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/project_name"
+        />
 
     <TextView
         android:id="@+id/created_date"
@@ -18,8 +28,19 @@
         android:layout_height="wrap_content"
         android:text="DEFAULT LOL"
         android:layout_marginLeft="8dp"
-        android:textSize="18sp"
-        android:layout_below="@+id/project_name"/>
+        android:textSize="12sp"
+        android:layout_below="@+id/project_name"
+        android:layout_toRightOf="@+id/created_date_label"/>
+
+    <TextView
+        android:id="@+id/updated_date_label"
+        android:text="Last Updated:"
+        android:textSize="12sp"
+        android:layout_marginLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/project_name"
+        android:layout_toRightOf="@+id/created_date"/>
 
     <TextView
         android:id="@+id/updated_date"
@@ -27,8 +48,8 @@
         android:layout_height="wrap_content"
         android:text="DEFAULT LOL"
         android:layout_marginLeft="8dp"
-        android:textSize="18sp"
+        android:textSize="12sp"
         android:layout_below="@+id/project_name"
-        android:layout_toRightOf="@+id/created_date"/>
+        android:layout_toRightOf="@+id/updated_date_label"/>
 
 </RelativeLayout>
