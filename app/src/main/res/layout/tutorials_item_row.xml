@@ -14,4 +14,34 @@
         android:textSize="18sp"/>
 
 
+    <TextView
+        android:id="@+id/tutorial_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DAY LOL"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="center"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:id="@+id/tutorial_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TIME LOL"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="center"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:id="@+id/tutorial_student_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COUNT LOL"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="center"
+        android:textSize="18sp"/>
+
+
 </LinearLayout>

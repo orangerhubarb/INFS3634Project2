@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.infs3634project2.R;
@@ -31,7 +33,7 @@ public class NewStudent extends AppCompatActivity {
     private TextInputLayout zIDError;
 
     //Maybe change year of degree to the scroll thing??
-    private EditText yearOfDegreeEditText;
+    private Spinner yearOfDegreeSpinner;
     private EditText degreeEditText;
     private EditText githubUsernameEditText;
     private EditText strengths;
@@ -72,7 +74,12 @@ public class NewStudent extends AppCompatActivity {
         zIDEditText = (EditText) findViewById(R.id.zIDEditText);
         zIDError = (TextInputLayout) findViewById(R.id.zIDTextInput);
 
-        yearOfDegreeEditText = (EditText) findViewById(R.id.yearOfDegreeEditText);
+        yearOfDegreeSpinner = (Spinner) findViewById(R.id.yearOfDegreeSpinnerProfile);
+        ArrayAdapter<CharSequence> yearOfDegreeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.yearOfDegree_array, android.R.layout.simple_spinner_item);
+        yearOfDegreeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearOfDegreeSpinner.setAdapter(yearOfDegreeAdapter);
+
         degreeEditText = (EditText) findViewById(R.id.degreeEditText);
         githubUsernameEditText = (EditText) findViewById(R.id.githubUserEditText);
         strengths = (EditText) findViewById(R.id.strengthsEditText);
@@ -91,7 +98,7 @@ public class NewStudent extends AppCompatActivity {
 
                 String zID = zIDEditText.getText().toString();
                 String degree = degreeEditText.getText().toString();
-                int yearOfDegree = Integer.parseInt(yearOfDegreeEditText.getText().toString());
+                int yearOfDegree = Integer.parseInt(yearOfDegreeSpinner.getSelectedItem().toString());
                 String githubUsername = githubUsernameEditText.getText().toString();
 
                 //Could we maybe do strengths/weaknesses after?? Just to reduce clustering of the screen
@@ -134,6 +141,7 @@ public class NewStudent extends AppCompatActivity {
                     showStudentProfile.putExtra("StudentID", studentID);
                     showStudentProfile.putExtra("TutorialID", tutorialID);
                     startActivity(showStudentProfile);
+                    finish();
                 }
 
             }

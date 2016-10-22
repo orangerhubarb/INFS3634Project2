@@ -11,9 +11,14 @@ public class Tutorial {
     private String name;
     private ArrayList<Student> students;
     private int tutorialID;
+    private String time;
+    private String day;
+    public int studentCount = 0;
 
-    public Tutorial(String name) {
+    public Tutorial(String name, String day, String time) {
         this.name = name;
+        this.day = day;
+        this.time = time;
     }
 
     public Tutorial() {
@@ -42,5 +47,29 @@ public class Tutorial {
 
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public int getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(int studentCount) {
+        this.studentCount = studentCount;
     }
 }

@@ -58,23 +58,33 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
     public class TutorialsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView tutorialName;
+        private TextView tutorialDay;
+        private TextView tutorialStudentCount;
+        private TextView tutorialTime;
+
         private Tutorial tutorialItem;
 
         public TutorialsHolder(View itemView) {
             super(itemView);
             tutorialName = (TextView) itemView.findViewById(R.id.tutorial_name);
+            tutorialDay = (TextView) itemView.findViewById(R.id.tutorial_day);
+            tutorialTime = (TextView) itemView.findViewById(R.id.tutorial_time);
+            tutorialStudentCount = (TextView) itemView.findViewById(R.id.tutorial_student_count);
+
             itemView.setOnClickListener(this);
         }
 
         public void bindTutorial (Tutorial tutorialItem) {
             this.tutorialItem = tutorialItem;
             tutorialName.setText(tutorialItem.getName());
+            tutorialTime.setText(tutorialItem.getTime());
+            tutorialDay.setText(tutorialItem.getDay());
+            tutorialStudentCount.setText(String.valueOf(tutorialItem.getStudentCount()));
         }
 
         @Override
         public void onClick(View v) {
             Context context = v.getContext();
-            Intent showStudents = new Intent(context, StudentsActivity.class);
 
             DBOpenHelper dbOpenHelper = new DBOpenHelper(context);
             StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
@@ -84,7 +94,6 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
                 tutorialsActivity.updateFragmentList(tutorialItem.getTutorialID());
             }
 
-            //context.startActivity(showStudents);
         }
     }
 }

@@ -1,10 +1,13 @@
 package com.example.infs3634project2.views;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -12,10 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.infs3634project2.R;
@@ -34,12 +39,12 @@ public class EditStudent extends AppCompatActivity {
     private EditText zIDEditText;
     private TextInputLayout zIDError;
 
-    //Maybe change year of degree to the scroll thing??
-    private EditText yearOfDegreeEditText;
+
     private EditText degreeEditText;
     private EditText githubUsernameEditText;
     private EditText strengths;
     private EditText weaknesses;
+    private Spinner yearOfDegreeSpinner;
     private ImageView studentPictureEdit;
     private Button confirmStudentSaveButton;
 
@@ -116,8 +121,17 @@ public class EditStudent extends AppCompatActivity {
         zIDEditText.setText(zIDText);
         zIDError = (TextInputLayout) findViewById(R.id.zIDTextInput);
 
-        yearOfDegreeEditText = (EditText) findViewById(R.id.yearOfDegreeEditText);
-        yearOfDegreeEditText.setText(String.valueOf(yearOfDegreeText));
+        yearOfDegreeSpinner = (Spinner) findViewById(R.id.yearOfDegreeSpinnerEdit);
+        ArrayAdapter<CharSequence> yearOfDegreeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.yearOfDegree_array, android.R.layout.simple_spinner_item);
+        yearOfDegreeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearOfDegreeSpinner.setAdapter(yearOfDegreeAdapter);
+
+        int spinnerPosition = yearOfDegreeAdapter.getPosition(String.valueOf(yearOfDegreeText));
+        yearOfDegreeSpinner.setSelection(spinnerPosition);
+
+
+
         degreeEditText = (EditText) findViewById(R.id.degreeEditText);
         degreeEditText.setText(degreeText);
         githubUsernameEditText = (EditText) findViewById(R.id.githubUserEditText);
@@ -130,9 +144,21 @@ public class EditStudent extends AppCompatActivity {
         takeNewPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                Log.d("IMAGE", "IMAGE SNAPPED");
+
+                if (checkSelfPermission(Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    requestPermissions(new String[]{Manifest.permission.CAMERA},
+                            CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                }
+
+                else {
+                    Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                    Log.d("IMAGE", "IMAGE SNAPPED");
+                }
+
             }
         });
 
@@ -150,7 +176,7 @@ public class EditStudent extends AppCompatActivity {
 
                 String zID = zIDEditText.getText().toString();
                 String degree = degreeEditText.getText().toString();
-                int yearOfDegree = Integer.parseInt(yearOfDegreeEditText.getText().toString());
+                int yearOfDegree = Integer.parseInt(yearOfDegreeSpinner.getSelectedItem().toString());
                 String githubUsername = githubUsernameEditText.getText().toString();
 
                 //Could we maybe do strengths/weaknesses after?? Just to reduce clustering of the screen
@@ -192,6 +218,7 @@ public class EditStudent extends AppCompatActivity {
                     showStudentProfile.putExtra("StudentID", studentID);
                     showStudentProfile.putExtra("TutorialID", tutorialID);
                     startActivity(showStudentProfile);
+                    finish();
                 }
             }
         });
@@ -222,6 +249,23 @@ public class EditStudent extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                Log.d("IMAGE", "IMAGE SNAPPED");
+
+            }
+            else {
+
+            }
+        }
     }
 
 }

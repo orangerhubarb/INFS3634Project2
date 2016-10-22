@@ -26,12 +26,74 @@
             android:maxLength="8"/>
     </android.support.design.widget.TextInputLayout>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tutorialDayEditText"
+        android:hint="Tutorial Day"
+        android:maxLines="1"
+        android:maxLength="8"
+        android:layout_below="@id/tutorialNameTextInput"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/classTimeLabel"
+        android:layout_below="@id/tutorialDayEditText"
+        android:text="Class Time"/>
+
+    <LinearLayout
+        android:id="@+id/classStartEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/classTimeLabel"
+        android:orientation="horizontal">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/classStartSpinner">
+        </Spinner>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/classAMPMStartSpinner">
+        </Spinner>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/StarttoEndTextView"
+            android:layout_height="wrap_content"
+            android:text=" to " />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/classEndSpinner">
+
+        </Spinner>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/classAMPMEndSpinner">
+        </Spinner>
+
+
+    </LinearLayout>
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/day_spinner"
+        android:layout_below="@id/classStartEnd">
+    </Spinner>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/confirmTutorialAddButton"
         android:text="Add new Tutorial"
-        android:layout_below="@+id/tutorialNameTextInput"/>
+        android:layout_below="@+id/day_spinner"/>
 
 </RelativeLayout>

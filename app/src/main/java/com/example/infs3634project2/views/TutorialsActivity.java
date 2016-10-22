@@ -116,6 +116,23 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
+        TutorialsContract tutorialsContract = new TutorialsContract(dbOpenHelper);
+
+        tutorialsList = tutorialsContract.getTutorials();
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.tutorialsRecylerView);
+        mAdapter = new TutorialsAdapter(tutorialsList, this);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+    }
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
