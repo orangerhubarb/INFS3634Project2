@@ -13,33 +13,80 @@
         android:textStyle="bold" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="zID"
+        android:id="@+id/zIDLabel"
+        android:layout_below="@id/basicInfo" />
+
+    <TextView
         android:id="@+id/zIDTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/basicInfo"/>
+        android:layout_below="@+id/zIDLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Degree"
+        android:id="@+id/degreeLabel"
+        android:layout_below="@id/zIDTextView"
+        android:layout_marginTop="10dp"/>
+
 
     <TextView
         android:id="@+id/degreeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/zIDTextView" />
+        android:layout_below="@+id/degreeLabel"
+        android:text="You have not entered this student's degree."/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year of Degree"
+        android:id="@+id/yearOfDegreeLabelFrag1"
+        android:layout_below="@id/degreeTextView"
+        android:layout_marginTop="10dp"/>
+
 
     <TextView
         android:id="@+id/yearOfDegreeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/degreeTextView" />
+        android:layout_below="@+id/yearOfDegreeLabelFrag1" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:id="@+id/phoneNumberLabelFrag1"
+        android:layout_below="@id/yearOfDegreeTextView"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/yearOfDegreeTextView" />
+        android:layout_below="@+id/phoneNumberLabelFrag1"
+        android:text="You have not entered this student's phone number."/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:id="@+id/emailLabelFrag1"
+        android:layout_below="@id/phoneNumberTextView"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/phoneNumberTextView" />
+        android:layout_below="@+id/emailLabelFrag1"
+        android:text="You have not entered this student's email address."/>
 
 </RelativeLayout>
