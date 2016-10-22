@@ -35,8 +35,10 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
     private LinearLayoutManager projectsLinearLayoutManager;
     private Student mStudent;
     private TextView invalidUsername;
+    private TextView username;
 
     public FragmentTwo() {
+
     }
 
     @Override
@@ -57,6 +59,11 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
         studentWeakness = (TextView) view.findViewById(R.id.weaknessesTextView);
         projectsRecyclerView = (RecyclerView) view.findViewById(R.id.projectsRecyclerView);
 
+        username = (TextView) view.findViewById(R.id.username);
+        if(mStudent.getGithubUsername() != null || !mStudent.getGithubUsername().equals("")) {
+            username.setText(mStudent.getGithubUsername());
+        }
+
         studentStrength.setText(mStudent.getStrengths());
         studentWeakness.setText(mStudent.getWeaknesses());
 
@@ -65,10 +72,8 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
             GitHubDataProvider gitHubDataProvider = new GitHubDataProvider(this.getContext());
             gitHubDataProvider.getGitProject(githubUser, this);
         }
-
         return view;
     }
-
 
     @Override
     public void onTaskCompleted(ArrayList<Projects> listOfProjects) {
