@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.infs3634project2.R;
@@ -32,9 +35,11 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
     private TutorialsAdapter mAdapter;
     private StudentsAdapter studentsAdapter;
     private ArrayList<Tutorial> tutorialsList;
+    private ArrayList<Student> studentsList;
     private LinearLayoutManager mLinearLayoutManager;
     private int currentTutorialID;
     private RecyclerView getmRecyclerViewStudents;
+    private EditText studentsSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +92,8 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
+        studentsSearch = (EditText) findViewById(R.id.searchStudents);
+
         getmRecyclerViewStudents = (RecyclerView) findViewById(R.id.studentsRecyclerViewFragment);
 
         Log.d("CurrentTutID", String.valueOf(currentTutorialID));
@@ -100,7 +107,6 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
         DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
         StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
 
-        ArrayList<Student> studentsList;
         studentsList = studentsContract.getStudentsList(tutorialID);
         currentTutorialID = tutorialID;
 
@@ -109,6 +115,8 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
         Log.d("STULIST", studentsList.toString());
         getmRecyclerViewStudents.setAdapter(studentsAdapter);
         studentsAdapter.notifyDataSetChanged();
+
+        searchStudentsTextListener();
 
 
 
@@ -134,5 +142,40 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    public void searchStudentsTextListener() {
+        studentsSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                s = s.toString().toLowerCase();
+
+                final ArrayList<Student> newList  = new ArrayList<>();
+
+                for(int i = 0 ; i < studentsList.size() ; i++) {
+                    final String pokemonSearch = studentsList.get(i).getFirstName().toLowerCase() + " " + studentsList.get(i).getLastName().toLowerCase() ;
+                    if(pokemonSearch.contains(s)) {
+                        newList.add(studentsList.get(i));
+                    }
+                }
+
+                getmRecyclerViewStudents.setLayoutManager(new LinearLayoutManager(TutorialsActivity.this));
+                studentsAdapter = new StudentsAdapter(newList);
+                getmRecyclerViewStudents.setAdapter(studentsAdapter);
+                studentsAdapter.notifyDataSetChanged();
+            }
+
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }

@@ -40,12 +40,12 @@ public class StudentProfileTabs extends AppCompatActivity {
     private ViewPager viewPager;
 
     private Button editStudentButton;
-    private TextView studentName;
 
     private int studentID;
     private int tutorialID;
 
     private ImageView studentPicture;
+    private TextView studentName;
     private ImageButton backButton;
 
     @Override
@@ -97,6 +97,8 @@ public class StudentProfileTabs extends AppCompatActivity {
                 extras.putString("GITHUB_USER", student.getGithubUsername());
                 extras.putString("STRENGTHS", student.getStrengths());
                 extras.putString("WEAKNESSES", student.getWeaknesses());
+                extras.putString("PHONE_NUMBER", student.getPhoneNumber());
+                extras.putString("EMAIL", student.getEmail());
 
                 if(student.getStudentPicture() != null) {
                     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -107,10 +109,9 @@ public class StudentProfileTabs extends AppCompatActivity {
                 startActivity(showEdit);
             }
         });
-
-        studentName = (TextView) findViewById(R.id.studentName);
-        studentName.setText(student.getFirstName() + " " + student.getLastName());
         studentPicture = (ImageView) findViewById(R.id.studentPictureProfile);
+        studentName = (TextView) findViewById(R.id.studentNameTextView);
+        studentName.setText(student.getFirstName() + " " + student.getLastName());
 
 
         if(student.getStudentPicture() != null) {

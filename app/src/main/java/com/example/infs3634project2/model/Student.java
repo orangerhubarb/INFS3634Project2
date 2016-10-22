@@ -21,6 +21,8 @@ public class Student implements Serializable {
     private String strengths;
     private String weaknesses;
     private Bitmap studentPicture;
+    private String phoneNumber;
+    private String email;
 
     private List<String> todoList;
 
@@ -137,5 +139,21 @@ public class Student implements Serializable {
 
     public void setStudentPicture(Bitmap studentPicture) {
         this.studentPicture = studentPicture;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

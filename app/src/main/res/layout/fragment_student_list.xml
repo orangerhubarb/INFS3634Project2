@@ -10,10 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchStudents"
+            android:hint="Search for students here"
+            android:textSize="17sp"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:backgroundTint="@color/colorPrimary"
+            />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/studentsRecyclerViewFragment"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchStudents"/>
 
         <Button
             android:id="@+id/newStudentButton"

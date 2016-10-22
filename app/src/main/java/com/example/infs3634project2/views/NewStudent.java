@@ -39,6 +39,9 @@ public class NewStudent extends AppCompatActivity {
     private EditText githubUsernameEditText;
     private EditText strengths;
     private EditText weaknesses;
+    private EditText phonenumber;
+    private EditText email;
+
     private Button confirmStudentAddButton;
     private int tutorialID;
 
@@ -86,6 +89,8 @@ public class NewStudent extends AppCompatActivity {
         githubUsernameEditText = (EditText) findViewById(R.id.githubUserEditText);
         strengths = (EditText) findViewById(R.id.strengthsEditText);
         weaknesses = (EditText) findViewById(R.id.weaknessesEditText);
+        phonenumber = (EditText) findViewById(R.id.phonenumberEditText);
+        email = (EditText) findViewById(R.id.emailEditText);
 
         confirmStudentAddButton = (Button) findViewById(R.id.confirmStudentAddButton);
 
@@ -130,6 +135,8 @@ public class NewStudent extends AppCompatActivity {
 
                     Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
                     student.setStudentPicture(BitmapFactory.decodeResource(getResources(), R.drawable.unknown_person));
+                    student.setEmail(email.getText().toString());
+                    student.setPhoneNumber(phonenumber.getText().toString());
 
                     DBOpenHelper helper = new DBOpenHelper(NewStudent.this);
                     StudentsContract studentsContract = new StudentsContract(helper);

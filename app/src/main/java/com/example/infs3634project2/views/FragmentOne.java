@@ -22,6 +22,8 @@ public class FragmentOne extends Fragment {
     private TextView studentZID;
     private TextView studentDegree;
     private TextView studentYear;
+    private TextView phonenumber;
+    private TextView email;
     private Student mStudent;
 
     public FragmentOne() {
@@ -42,10 +44,15 @@ public class FragmentOne extends Fragment {
         studentZID = (TextView) view.findViewById(R.id.zIDTextView);
         studentDegree = (TextView) view.findViewById(R.id.degreeTextView);
         studentYear = (TextView) view.findViewById(R.id.yearOfDegreeTextView);
+        phonenumber = (TextView) view.findViewById(R.id.phoneNumberTextView);
+        email = (TextView) view.findViewById(R.id.emailTextView);
 
         studentZID.setText("(" + mStudent.getzID() + ")");
         studentDegree.setText(mStudent.getDegree());
         studentYear.setText(String.valueOf(mStudent.getYearOfDegree()));
+        phonenumber.setText(mStudent.getPhoneNumber());
+        email.setText(mStudent.getEmail());
+
 
         return view;
     }

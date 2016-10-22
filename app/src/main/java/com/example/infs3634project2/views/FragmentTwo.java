@@ -93,4 +93,6 @@ public class FragmentTwo extends Fragment implements GitHubCallback<ArrayList<Pr
     public void onFailure(String fail) {
         invalidUsername.setText("You have entered an invalid Github username.");
     }
+
+
 }

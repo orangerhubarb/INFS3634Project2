@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -44,6 +45,8 @@ public class EditStudent extends AppCompatActivity {
     private EditText githubUsernameEditText;
     private EditText strengths;
     private EditText weaknesses;
+    private EditText phonenumber;
+    private EditText email;
     private Spinner yearOfDegreeSpinner;
     private ImageView studentPictureEdit;
     private Button confirmStudentSaveButton;
@@ -56,6 +59,9 @@ public class EditStudent extends AppCompatActivity {
     private String githubUsernameText;
     private String strengthsText;
     private String weaknessesText;
+    private String phonenumberText;
+    private String emailText;
+
     private int tutorialID;
     private int studentID;
 
@@ -96,6 +102,8 @@ public class EditStudent extends AppCompatActivity {
         strengthsText = (String) getIntent().getSerializableExtra("STRENGTHS");
         weaknessesText = (String) getIntent().getSerializableExtra("WEAKNESSES");
         tutorialID = (int) getIntent().getSerializableExtra("TUTORIAL_ID");
+        phonenumberText = (String) getIntent().getSerializableExtra("PHONE_NUMBER");
+        emailText = (String) getIntent().getSerializableExtra("EMAIL");
 
         studentPictureEdit = (ImageView) findViewById(R.id.studentPictureEdit);
         takeNewPhoto = (Button) findViewById(R.id.takePhoto);
@@ -138,6 +146,13 @@ public class EditStudent extends AppCompatActivity {
         strengths.setText(strengthsText);
         weaknesses = (EditText) findViewById(R.id.weaknessesEditText);
         weaknesses.setText(weaknessesText);
+
+        phonenumber = (EditText) findViewById(R.id.phonenumberEditText);
+        phonenumber.setText(phonenumberText);
+
+        email = (EditText) findViewById(R.id.emailEditText);
+        email.setText(emailText);
+
 
         takeNewPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,6 +221,8 @@ public class EditStudent extends AppCompatActivity {
                     if(studentPictureBitmap != null) {
                         student.setStudentPicture(studentPictureBitmap);
                     }
+                    student.setPhoneNumber(phonenumber.getText().toString());
+                    student.setEmail(email.getText().toString());
 
                     DBOpenHelper helper = new DBOpenHelper(EditStudent.this);
                     StudentsContract studentsContract = new StudentsContract(helper);

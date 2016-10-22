@@ -26,20 +26,11 @@
             android:maxLength="8"/>
     </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tutorialDayEditText"
-        android:hint="Tutorial Day"
-        android:maxLines="1"
-        android:maxLength="8"
-        android:layout_below="@id/tutorialNameTextInput"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/classTimeLabel"
-        android:layout_below="@id/tutorialDayEditText"
+        android:layout_below="@id/firstNameEditText"
         android:text="Class Time"/>
 
     <LinearLayout

@@ -36,7 +36,9 @@ public class StudentsContract {
                     StudentEntry.COLUMN_STRENGTHS + " TEXT," +
                     StudentEntry.COLUMN_WEAKNESSES + " TEXT," +
                     StudentEntry.COLUMN_TODO + " TEXT," +
-                    StudentEntry.COLUMN_STUDENT_PICTURE + " BLOB" + ")";
+                    StudentEntry.COLUMN_STUDENT_PICTURE + " BLOB," +
+                    StudentEntry.COLUMN_PHONE_NUMBER + " TEXT, " +
+                    StudentEntry.COLUMN_EMAIL + " TEXT" + ")";
 
     public StudentsContract(SQLiteOpenHelper dbHelper) {
         this.dbHelper = dbHelper;
@@ -55,6 +57,9 @@ public class StudentsContract {
         public static final String COLUMN_WEAKNESSES = "weaknesses";
         public static final String COLUMN_TODO = "todo";
         public static final String COLUMN_STUDENT_PICTURE = "studentpicture";
+        public static final String COLUMN_PHONE_NUMBER = "phonenumber";
+        public static final String COLUMN_EMAIL = "email";
+
 
     }
 
@@ -71,6 +76,8 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_GITHUBURL, student.getGithubUsername());
         values.put(StudentEntry.COLUMN_STRENGTHS, student.getStrengths());
         values.put(StudentEntry.COLUMN_WEAKNESSES, student.getWeaknesses());
+        values.put(StudentEntry.COLUMN_PHONE_NUMBER, student.getPhoneNumber());
+        values.put(StudentEntry.COLUMN_EMAIL, student.getEmail());
 
         byte[] studentImage = getBitmapAsByteArray(student.getStudentPicture());
         values.put(StudentEntry.COLUMN_STUDENT_PICTURE, studentImage);
@@ -97,6 +104,8 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_GITHUBURL, student.getGithubUsername());
         values.put(StudentEntry.COLUMN_STRENGTHS, student.getStrengths());
         values.put(StudentEntry.COLUMN_WEAKNESSES, student.getWeaknesses());
+        values.put(StudentEntry.COLUMN_PHONE_NUMBER, student.getPhoneNumber());
+        values.put(StudentEntry.COLUMN_EMAIL, student.getEmail());
 
         if(student.getStudentPicture() != null) {
             byte[] studentImage = getBitmapAsByteArray(student.getStudentPicture());
@@ -173,7 +182,9 @@ public class StudentsContract {
                 StudentEntry.COLUMN_STRENGTHS,
                 StudentEntry.COLUMN_WEAKNESSES,
                 StudentEntry.COLUMN_TODO,
-                StudentEntry.COLUMN_STUDENT_PICTURE
+                StudentEntry.COLUMN_STUDENT_PICTURE,
+                StudentEntry.COLUMN_PHONE_NUMBER,
+                StudentEntry.COLUMN_EMAIL
         };
 
         Cursor cur = db.query(
@@ -206,6 +217,9 @@ public class StudentsContract {
                 student.setStudentPicture(BitmapFactory.decodeByteArray(studentPicture, 0, studentPicture.length));
 
             }
+
+            student.setPhoneNumber(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_PHONE_NUMBER)));
+            student.setEmail(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_EMAIL)));
         }
 
         cur.close();
