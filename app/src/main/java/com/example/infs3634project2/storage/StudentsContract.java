@@ -72,6 +72,11 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_STRENGTHS, student.getStrengths());
         values.put(StudentEntry.COLUMN_WEAKNESSES, student.getWeaknesses());
 
+        byte[] studentImage = getBitmapAsByteArray(student.getStudentPicture());
+        values.put(StudentEntry.COLUMN_STUDENT_PICTURE, studentImage);
+
+
+
 
         long newRowId;
         newRowId = db.insert(TABLE_NAME, null, values);

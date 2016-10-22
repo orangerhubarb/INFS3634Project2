@@ -1,6 +1,7 @@
 package com.example.infs3634project2.views;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -128,8 +129,7 @@ public class NewStudent extends AppCompatActivity {
                 if(noError == true) {
 
                     Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
-
-                    //Probably chuck in cases here in case they leave stuff blank? But first name, last name, zID is compulsory
+                    student.setStudentPicture(BitmapFactory.decodeResource(getResources(), R.drawable.unknown_person));
 
                     DBOpenHelper helper = new DBOpenHelper(NewStudent.this);
                     StudentsContract studentsContract = new StudentsContract(helper);
