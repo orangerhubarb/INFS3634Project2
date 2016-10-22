@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         continueButton = (Button) findViewById(R.id.continueButton);
-        testButton = (Button) findViewById(R.id.testButton);
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -31,11 +30,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        testButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent showClasses = new Intent(MainActivity.this, StudentProfileTabs.class);
-                startActivity(showClasses);
-            }
-        });
+
     }
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.infs3634project2.R;
@@ -31,6 +32,8 @@ public class NewTutorial extends AppCompatActivity {
 
     private EditText tutorialTime;
 
+    private ImageButton backButton;
+
     private TextInputLayout tutorialNameError;
 
     @Override
@@ -40,8 +43,17 @@ public class NewTutorial extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("New Tutorial");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent backToTutorialList = new Intent(NewTutorial.this, TutorialsActivity.class);
+                backToTutorialList.putExtra("TutorialID", 0);
+                startActivity(backToTutorialList);
+            }
+        });
 
         confirmTutorialAddButton = (Button) findViewById(R.id.confirmTutorialAddButton);
         tutorialName = (EditText) findViewById(R.id.tutorialNameEditText);
