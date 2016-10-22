@@ -47,7 +47,7 @@ public class FragmentOne extends Fragment {
         phonenumber = (TextView) view.findViewById(R.id.phoneNumberTextView);
         email = (TextView) view.findViewById(R.id.emailTextView);
 
-        studentZID.setText("(" + mStudent.getzID() + ")");
+        studentZID.setText(mStudent.getzID());
 
         if (mStudent.getDegree() != null && !mStudent.getDegree().trim().isEmpty()) {
             studentDegree.setText(mStudent.getDegree());
