@@ -23,8 +23,8 @@
             android:textSize="17sp"
             android:paddingLeft="18dp"
             android:paddingRight="18dp"
-            android:backgroundTint="@color/colorPrimary"
-            />
+            android:backgroundTint="@color/colorAccent"
+            android:drawableRight="@android:drawable/ic_menu_search" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/studentsRecyclerViewFragment"
@@ -35,11 +35,13 @@
         <Button
             android:id="@+id/newStudentButton"
             android:text="New Student"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/studentsRecyclerView"
+            android:backgroundTint="@color/colorAccent"
             android:visibility="invisible"
             />
 

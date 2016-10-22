@@ -15,7 +15,7 @@
         android:text="DEFAULT LOL"
         android:padding="8dp"
         android:layout_margin="4dp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:textSize="24sp"/>
 

@@ -15,6 +15,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:id="@+id/tutorialNameTextInput">
 
         <EditText
@@ -29,6 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:id="@+id/classTimeLabel"
         android:layout_below="@id/tutorialNameTextInput"
         android:text="Class Time"
@@ -39,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/classTimeLabel"
+        android:layout_centerInParent="true"
         android:orientation="horizontal">
         <Spinner
             android:layout_width="wrap_content"
@@ -78,6 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tutorial Day"
+        android:layout_centerInParent="true"
         android:layout_below="@id/classStartEnd"
         android:id="@+id/tutorialDayLabel"
         android:layout_marginTop="15dp"/>
@@ -85,6 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/day_spinner"
+        android:layout_centerInParent="true"
         android:layout_below="@id/tutorialDayLabel">
     </Spinner>
 
@@ -93,6 +98,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/confirmTutorialAddButton"
         android:text="Add new Tutorial"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
         android:layout_below="@+id/day_spinner"
         android:layout_marginTop="15dp"/>
 
