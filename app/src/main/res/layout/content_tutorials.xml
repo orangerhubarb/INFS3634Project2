@@ -21,14 +21,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-
     <fragment
         android:id="@+id/studentListFragment"
         android:layout_toRightOf="@id/tutorialsRecylerView"
         android:name="com.example.infs3634project2.views.StudentListFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
 </LinearLayout>
