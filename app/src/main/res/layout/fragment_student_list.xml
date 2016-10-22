@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="8dp"
+    app:cardElevation="4dp"
     android:layout_margin="4dp"
     app:cardBackgroundColor="#FFFAFAFA"
     tools:context="com.example.infs3634project2.views.StudentListFragment">
@@ -34,11 +34,14 @@
 
         <Button
             android:id="@+id/newStudentButton"
+            android:text="New Student"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/studentsRecyclerView"
             android:layout_alignParentBottom="true"
-            android:text="New Student" />
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/studentsRecyclerView"
+            android:visibility="invisible"
+            />
 
     </RelativeLayout>
 

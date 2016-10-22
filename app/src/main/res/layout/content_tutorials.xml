@@ -12,14 +12,29 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_tutorials"
     android:orientation="horizontal"
-    android:weightSum="2"
-    >
+    android:weightSum="2">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/tutorialsRecylerView"
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/tutorialsRecylerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/newTutorialButton"
+            android:text="New Tutorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
 
     <fragment
         android:id="@+id/studentListFragment"
@@ -27,6 +42,7 @@
         android:name="com.example.infs3634project2.views.StudentListFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:layout_weight="1" />
 
 </LinearLayout>

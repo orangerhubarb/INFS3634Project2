@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import com.example.infs3634project2.views.StudentsActivity;
 import com.example.infs3634project2.views.TutorialsActivity;
 
 import java.util.ArrayList;
+
+import static android.view.View.VISIBLE;
 
 /**
  * Created by Davian on 6/10/16.
@@ -94,6 +97,8 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
                 tutorialsActivity.updateFragmentList(tutorialItem.getTutorialID());
             }
 
+            Button newStudentButton = (Button) tutorialsActivity.findViewById(R.id.newStudentButton);
+            newStudentButton.setVisibility(VISIBLE);
         }
     }
 }

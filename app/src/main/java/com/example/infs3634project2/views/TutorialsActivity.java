@@ -50,9 +50,9 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
 
         currentTutorialID = (int) getIntent().getSerializableExtra("TutorialID");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button newTutorialButton = (Button) findViewById(R.id.newTutorialButton);
+        assert newTutorialButton != null;
+        newTutorialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //This should redirect to a blank list of the students but working out Tutorials right now
@@ -118,8 +118,6 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
 
         searchStudentsTextListener();
 
-
-
     }
 
     @Override
@@ -169,8 +167,6 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
                 getmRecyclerViewStudents.setAdapter(studentsAdapter);
                 studentsAdapter.notifyDataSetChanged();
             }
-
-
 
             @Override
             public void afterTextChanged(Editable s) {
