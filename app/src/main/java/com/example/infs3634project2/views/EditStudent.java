@@ -49,7 +49,6 @@ public class EditStudent extends AppCompatActivity {
     private EditText phonenumber;
     private EditText email;
     private Spinner yearOfDegreeSpinner;
-    private ImageView studentPictureEdit;
     private Button confirmStudentSaveButton;
 
     private String firstNameText;
@@ -65,11 +64,6 @@ public class EditStudent extends AppCompatActivity {
 
     private int tutorialID;
     private int studentID;
-
-    private byte[] studentPictureByteArray;
-    private Bitmap studentPictureBitmap;
-    protected static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
-    private Button takeNewPhoto;
 
     private ImageButton backButton;
 
@@ -107,15 +101,6 @@ public class EditStudent extends AppCompatActivity {
         phonenumberText = (String) getIntent().getSerializableExtra("PHONE_NUMBER");
         emailText = (String) getIntent().getSerializableExtra("EMAIL");
 
-        studentPictureEdit = (ImageView) findViewById(R.id.studentPictureEdit);
-        takeNewPhoto = (Button) findViewById(R.id.takePhoto);
-
-        if (getIntent().hasExtra("STUDENT_PICTURE")) {
-            studentPictureByteArray = getIntent().getByteArrayExtra("STUDENT_PICTURE");
-            studentPictureBitmap = BitmapFactory.decodeByteArray(studentPictureByteArray, 0, studentPictureByteArray.length);
-            studentPictureEdit.setImageBitmap(studentPictureBitmap);
-
-        }
 
         Log.d("STUDENT DETAILS DEBUG", firstNameText + lastNameText + zIDText + yearOfDegreeText + degreeText + githubUsernameText + strengthsText + weaknessesText + tutorialID);
 
@@ -156,29 +141,6 @@ public class EditStudent extends AppCompatActivity {
         email.setText(emailText);
 
 
-        takeNewPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (checkSelfPermission(Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    requestPermissions(new String[]{Manifest.permission.CAMERA},
-                            CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                }
-
-                else {
-                    Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
-                    startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                    Log.d("IMAGE", "IMAGE SNAPPED");
-                }
-
-            }
-        });
-
-
-
         confirmStudentSaveButton = (Button) findViewById(R.id.confirmStudentSaveButton);
 
         confirmStudentSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -200,31 +162,30 @@ public class EditStudent extends AppCompatActivity {
                 String strength = strengths.getText().toString();
                 String weakness = weaknesses.getText().toString();
 
-                if(fName.matches("")) {
+                if (fName.matches("")) {
                     firstNameError.setErrorEnabled(true);
                     firstNameError.setError("You have not provided a first name.");
                     noError = false;
                 }
 
-                if(lName.matches("")) {
+                if (lName.matches("")) {
                     lastNameError.setErrorEnabled(true);
                     lastNameError.setError("You have not provided a last name.");
                     noError = false;
                 }
 
                 //Need to work out the regex here to match z followed by any 8 numbers
-                if(zID.matches("") || !zID.matches("z[0-9]{7}")) {
+                if (zID.matches("") || !zID.matches("z[0-9]{7}")) {
                     zIDError.setErrorEnabled(true);
                     zIDError.setError("You have not entered a valid zID.");
                     noError = false;
                 }
 
-                if(noError == true) {
+                if (noError == true) {
 
                     Student student = new Student(fName, lName, tutorialID, zID, yearOfDegree, degree, githubUsername, strength, weakness);
-                    if(studentPictureBitmap != null) {
-                        student.setStudentPicture(studentPictureBitmap);
-                    }
+
+
                     student.setPhoneNumber(phonenumber.getText().toString());
                     student.setEmail(email.getText().toString());
 
@@ -241,50 +202,6 @@ public class EditStudent extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (resultCode == RESULT_OK) {
-            if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-
-                //use imageUri here to access the image
-
-                Bundle extras = data.getExtras();
-
-                studentPictureBitmap = (Bitmap) extras.get("data");
-
-                studentPictureEdit.setImageBitmap(studentPictureBitmap);
-
-
-                // here you will get the image as bitmap
-
-
-            }
-            else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Picture was not taken", Toast.LENGTH_SHORT);
-            }
-        }
-
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
-                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                Log.d("IMAGE", "IMAGE SNAPPED");
-
-            }
-            else {
-
-            }
-        }
     }
 
 }
