@@ -96,6 +96,7 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
                 Log.d("TutAdapt tutID", String.valueOf(tutorialItem.getTutorialID()));
                 tutorialsActivity.updateFragmentList(tutorialItem.getTutorialID());
             }
+            tutorialsActivity.setStudentListTitle(tutorialItem.getName());
 
             Button newStudentButton = (Button) tutorialsActivity.findViewById(R.id.newStudentButton);
             newStudentButton.setVisibility(VISIBLE);

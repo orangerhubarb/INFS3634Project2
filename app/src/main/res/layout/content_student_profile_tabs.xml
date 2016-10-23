@@ -18,7 +18,9 @@
         android:src="@android:drawable/ic_menu_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"/>
 
     <ImageView
         android:layout_width="170dp"
@@ -39,6 +41,7 @@
         android:id="@+id/studentNameTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
+        android:textSize="20dp"
         android:layout_below="@id/studentPictureProfile"/>
 
     <android.support.design.widget.TabLayout

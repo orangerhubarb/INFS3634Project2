@@ -1,6 +1,7 @@
 package com.example.infs3634project2.views;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -50,6 +52,7 @@ public class EditStudent extends AppCompatActivity {
     private EditText email;
     private Spinner yearOfDegreeSpinner;
     private Button confirmStudentSaveButton;
+    private Button deleteStudentButton;
 
     private String firstNameText;
     private String lastNameText;
@@ -65,8 +68,8 @@ public class EditStudent extends AppCompatActivity {
     private int tutorialID;
     private int studentID;
 
-    private byte[] studentPictureByteArray;
     private ImageButton backButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +162,6 @@ public class EditStudent extends AppCompatActivity {
                 int yearOfDegree = Integer.parseInt(yearOfDegreeSpinner.getSelectedItem().toString());
                 String githubUsername = githubUsernameEditText.getText().toString();
 
-                //Could we maybe do strengths/weaknesses after?? Just to reduce clustering of the screen
                 String strength = strengths.getText().toString();
                 String weakness = weaknesses.getText().toString();
 
@@ -175,7 +177,6 @@ public class EditStudent extends AppCompatActivity {
                     noError = false;
                 }
 
-                //Need to work out the regex here to match z followed by any 8 numbers
                 if (zID.matches("") || !zID.matches("z[0-9]{7}")) {
                     zIDError.setErrorEnabled(true);
                     zIDError.setError("You have not entered a valid zID.");
@@ -201,6 +202,35 @@ public class EditStudent extends AppCompatActivity {
                     startActivity(showStudentProfile);
                     finish();
                 }
+            }
+        });
+
+        deleteStudentButton = (Button) findViewById(R.id.deleteStudentButton);
+        deleteStudentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(EditStudent.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Delete Student")
+                        .setMessage("Are you sure you want to delete this student?")
+                        .setPositiveButton("Delete Student", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DBOpenHelper helper = new DBOpenHelper(EditStudent.this);
+                                StudentsContract studentsContract = new StudentsContract(helper);
+                                studentsContract.deleteStudent(studentID);
+                                Intent intent = new Intent(EditStudent.this, TutorialsActivity.class);
+                                intent.putExtra("TutorialID", tutorialID);
+                                startActivity(intent);
+                                finish();
+                                Toast.makeText(EditStudent.this, "Student successfully deleted.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
     }

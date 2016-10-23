@@ -83,8 +83,6 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_STUDENT_PICTURE, studentImage);
 
 
-
-
         long newRowId;
         newRowId = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -107,7 +105,7 @@ public class StudentsContract {
         values.put(StudentEntry.COLUMN_PHONE_NUMBER, student.getPhoneNumber());
         values.put(StudentEntry.COLUMN_EMAIL, student.getEmail());
 
-        if(student.getStudentPicture() != null) {
+        if (student.getStudentPicture() != null) {
             byte[] studentImage = getBitmapAsByteArray(student.getStudentPicture());
             values.put(StudentEntry.COLUMN_STUDENT_PICTURE, studentImage);
         }
@@ -213,7 +211,7 @@ public class StudentsContract {
             student.setWeaknesses(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_WEAKNESSES)));
             student.setTodoList(convertStringToArray(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_TODO))));
 
-            if(cur.getBlob(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_STUDENT_PICTURE)) != null) {
+            if (cur.getBlob(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_STUDENT_PICTURE)) != null) {
                 byte[] studentPicture = cur.getBlob(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_STUDENT_PICTURE));
                 student.setStudentPicture(BitmapFactory.decodeByteArray(studentPicture, 0, studentPicture.length));
 
@@ -228,24 +226,32 @@ public class StudentsContract {
         return student;
     }
 
+    public void deleteStudent(int studentID) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        db.delete("students", "_id = " + studentID, null);
+        db.close();
+    }
+
     public void updateTodoList(List<String> newTodoList, int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put("todo", convertArrayToString(newTodoList));
-        db.update(TABLE_NAME, values, "_id="+id, null);
+        db.update(TABLE_NAME, values, "_id=" + id, null);
+        db.close();
 
     }
 
     //Converts a String array to string to store it
     public static String convertArrayToString(List<String> array) {
 
-        if(array.size() != 0) {
+        if (array.size() != 0) {
             String stringArray = array.get(0) + ",";
-            for(int i = 1; i < array.size(); i++) {
+            for (int i = 1; i < array.size(); i++) {
                 stringArray += array.get(i);
 
-                if(array.indexOf(i) != array.size()-1) {
+                if (array.indexOf(i) != array.size() - 1) {
                     stringArray += ", ";
                 }
             }
@@ -257,7 +263,7 @@ public class StudentsContract {
 
     //Converts the string back to a String Array
     public static List<String> convertStringToArray(String string) {
-        if(string == null || string.equals("null")) {
+        if (string == null || string.equals("null")) {
             List<String> blankArray = new ArrayList<>();
             return blankArray;
         } else {
@@ -265,6 +271,7 @@ public class StudentsContract {
             return array;
         }
     }
+
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);

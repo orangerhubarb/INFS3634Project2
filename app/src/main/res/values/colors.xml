@@ -8,4 +8,5 @@
     <color name="secondary_text">#757575</color>
     <color name="primary_inverse_text">#ffffff</color>
     <color name="secondary_text_inverse">#ffffff</color>
+    <color name="delete_colour">#FF0000</color>
 </resources>

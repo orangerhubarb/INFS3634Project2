@@ -242,6 +242,19 @@
                     android:background="@color/colorAccent"
                     android:textColor="@color/white"
                     android:padding="5dp"/>
+                <Button
+                    android:id="@+id/deleteStudentButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@id/confirmStudentSaveButton"
+                    android:layout_marginRight="15dp"
+                    android:text="Delete Student"
+                    android:background="@color/delete_colour"
+                    android:textColor="@color/white"
+                    android:padding="5dp"/>
+
+
 
             </RelativeLayout>
         </LinearLayout>

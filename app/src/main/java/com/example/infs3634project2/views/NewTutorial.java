@@ -55,6 +55,7 @@ public class NewTutorial extends AppCompatActivity {
                 Intent backToTutorialList = new Intent(NewTutorial.this, TutorialsActivity.class);
                 backToTutorialList.putExtra("TutorialID", 0);
                 startActivity(backToTutorialList);
+                finish();
             }
         });
 
@@ -115,6 +116,7 @@ public class NewTutorial extends AppCompatActivity {
                     Intent showClasses = new Intent(NewTutorial.this, TutorialsActivity.class);
                     showClasses.putExtra("TutorialID", tutorialID);
                     startActivity(showClasses);
+                    finish();
                 }
             }
         });

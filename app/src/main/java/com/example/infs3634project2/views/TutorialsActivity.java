@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infs3634project2.R;
@@ -43,6 +44,7 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
     private int currentTutorialID;
     private RecyclerView getmRecyclerViewStudents;
     private EditText studentsSearch;
+    private TextView studentListTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
 
 
         currentTutorialID = (int) getIntent().getSerializableExtra("TutorialID");
+        studentListTitle = (TextView) findViewById(R.id.studentListHeader);
 
         Button newTutorialButton = (Button) findViewById(R.id.newTutorialButton);
         assert newTutorialButton != null;
@@ -128,6 +131,10 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
 
         searchStudentsTextListener();
 
+    }
+
+    public void setStudentListTitle(String name) {
+        studentListTitle.setText("Student list for " + name);
     }
 
     @Override

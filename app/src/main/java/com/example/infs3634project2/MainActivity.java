@@ -13,7 +13,6 @@ import com.example.infs3634project2.views.TutorialsActivity;
 public class MainActivity extends AppCompatActivity {
 
     private Button continueButton;
-    private Button testButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent showClasses = new Intent(MainActivity.this, TutorialsActivity.class);
                 showClasses.putExtra("TutorialID", 0);
                 startActivity(showClasses);
+                finish();
             }
         });
 

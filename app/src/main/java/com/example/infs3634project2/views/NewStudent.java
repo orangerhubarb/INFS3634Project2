@@ -34,7 +34,6 @@ public class NewStudent extends AppCompatActivity {
     private EditText zIDEditText;
     private TextInputLayout zIDError;
 
-    //Maybe change year of degree to the scroll thing??
     private Spinner yearOfDegreeSpinner;
     private EditText degreeEditText;
     private EditText githubUsernameEditText;
