@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabGravity="fill"
-        app:tabSelectedTextColor="white"
+        app:tabSelectedTextColor="@color/white"
         android:background="@color/colorPrimaryDark"
         app:tabMode="fixed"
         android:layout_below="@+id/studentNameTextView"/>
