@@ -208,9 +208,9 @@ public class StudentProfileTabs extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentOne(), "ONE");
-        adapter.addFragment(new FragmentTwo(), "TWO");
-        adapter.addFragment(new FragmentThree(), "THREE");
+        adapter.addFragment(new FragmentOne(), "Basic Info");
+        adapter.addFragment(new FragmentTwo(), "Student Skills");
+        adapter.addFragment(new FragmentThree(), "To-do List");
         viewPager.setAdapter(adapter);
     }
 

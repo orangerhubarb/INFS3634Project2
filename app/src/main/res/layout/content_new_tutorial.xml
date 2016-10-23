@@ -7,89 +7,118 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="20dp"
     tools:context="com.example.infs3634project2.views.NewTutorial"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_new_tutorial">
 
+    <ImageView
+        android:id="@+id/ic_tutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_tutorial"/>
+
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/tutorialNameTextInput"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/tutorialNameTextInput">
+        android:layout_toRightOf="@+id/ic_tutorial">
 
         <EditText
+            android:id="@+id/tutorialNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tutorialNameEditText"
             android:hint="Tutorial Name"
+            android:textSize="20sp"
             android:maxLines="1"
             android:maxLength="8"/>
     </android.support.design.widget.TextInputLayout>
 
-    <TextView
+    <ImageView
+        android:id="@+id/ic_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_time"
+        android:layout_below="@+id/tutorialNameTextInput" />
+
+    <TextView
         android:id="@+id/classTimeLabel"
-        android:layout_below="@id/tutorialNameTextInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Class Time"
-        android:layout_marginTop="15dp"/>
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/tutorialNameTextInput"
+        android:layout_toRightOf="@+id/ic_time" />
 
     <LinearLayout
         android:id="@+id/classStartEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/classTimeLabel"
-        android:layout_centerInParent="true"
         android:orientation="horizontal">
+
         <Spinner
+            android:id="@+id/classStartSpinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/classStartSpinner">
-        </Spinner>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/classAMPMStartSpinner">
+            android:layout_height="wrap_content">
         </Spinner>
 
+        <Spinner
+            android:id="@+id/classAMPMStartSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </Spinner>
 
         <TextView
-            android:layout_width="wrap_content"
             android:id="@+id/StarttoEndTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="    to    " />
 
         <Spinner
+            android:id="@+id/classEndSpinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/classEndSpinner">
-
+            android:layout_height="wrap_content">
         </Spinner>
+
         <Spinner
+            android:id="@+id/classAMPMEndSpinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/classAMPMEndSpinner">
+            android:layout_height="wrap_content">
         </Spinner>
-
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/ic_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_day"
+        android:layout_below="@+id/classStartEnd"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tutorial Day"
-        android:layout_centerInParent="true"
+        android:textSize="20sp"
         android:layout_below="@id/classStartEnd"
+        android:layout_toRightOf="@+id/ic_day"
         android:id="@+id/tutorialDayLabel"
         android:layout_marginTop="15dp"/>
+
     <Spinner
+        android:id="@+id/day_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/day_spinner"
-        android:layout_centerInParent="true"
         android:layout_below="@id/tutorialDayLabel">
     </Spinner>
 
@@ -98,9 +127,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/confirmTutorialAddButton"
         android:text="Add new Tutorial"
+        android:padding="5dp"
         android:textColor="@color/white"
         android:background="@color/colorAccent"
         android:layout_below="@+id/day_spinner"
+        android:layout_toRightOf="@+id/classStartEnd"
         android:layout_marginTop="15dp"/>
 
 </RelativeLayout>
