@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -56,7 +57,7 @@ public class StudentProfileTabs extends AppCompatActivity {
     private ImageButton backButton;
     private ImageButton takePhoto;
 
-    protected static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE = 2;
+    protected static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,7 @@ public class StudentProfileTabs extends AppCompatActivity {
         studentID = (int) getIntent().getSerializableExtra("StudentID");
         tutorialID = (int) getIntent().getSerializableExtra("TutorialID");
         student = studentsContract.getStudent(studentID);
+        Log.d("STUDENTIDPASSED", String.valueOf(studentID));
 
         editStudentButton = (Button) findViewById(R.id.editStudentButton);
         editStudentButton.setOnClickListener(new View.OnClickListener() {
@@ -137,13 +139,13 @@ public class StudentProfileTabs extends AppCompatActivity {
                         != PackageManager.PERMISSION_GRANTED) {
 
                     requestPermissions(new String[]{Manifest.permission.CAMERA},
-                            CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE);
+                            CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
                 }
 
                 else {
-                    Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-                    startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE);
+                    startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
                     Log.d("IMAGE", "IMAGE SNAPPED");
                 }
 
@@ -154,11 +156,11 @@ public class StudentProfileTabs extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE);
+                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
                 Log.d("IMAGE", "IMAGE SNAPPED");
 
             }
@@ -172,9 +174,9 @@ public class StudentProfileTabs extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_PROFILE) {
+            if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 
-                //use imageUri here to access the image
+                Log.d("ImageTaken", "ImageTaken");
 
                 Bundle extras = data.getExtras();
 
@@ -182,6 +184,8 @@ public class StudentProfileTabs extends AppCompatActivity {
 
                 studentPicture.setImageBitmap(studentPictureBitmap);
                 student.setStudentPicture(studentPictureBitmap);
+
+                Log.d("ImageTaken", studentPictureBitmap.toString());
 
 
                 SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
@@ -193,7 +197,8 @@ public class StudentProfileTabs extends AppCompatActivity {
                 Log.d("Debug", "Content Values put method has been used");
 
                 db.update("students", cv, "_id=" + student.getStudentID(), null);
-                Log.d("Debug", "Successfully added studentpicture");
+
+                Log.d("Debug", student.getStudentID() + student.getStudentPicture().toString());
                 db.close();
 
 

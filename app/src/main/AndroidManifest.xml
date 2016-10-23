@@ -22,6 +22,7 @@
         <activity
             android:name=".views.TutorialsActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

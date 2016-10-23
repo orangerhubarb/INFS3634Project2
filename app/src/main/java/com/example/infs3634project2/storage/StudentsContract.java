@@ -202,6 +202,7 @@ public class StudentsContract {
             student = new Student();
             student.setFirstName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_FNAME)));
             student.setLastName(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_LNAME)));
+            student.setStudentID(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry._ID)));
             Log.d("Debug", "Name obtained");
             student.setTutorialID(cur.getInt(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_TUTORIAL)));
             student.setzID(cur.getString(cur.getColumnIndexOrThrow(StudentEntry.COLUMN_ZID)));

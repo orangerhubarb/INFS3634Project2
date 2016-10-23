@@ -65,6 +65,7 @@ public class EditStudent extends AppCompatActivity {
     private int tutorialID;
     private int studentID;
 
+    private byte[] studentPictureByteArray;
     private ImageButton backButton;
 
     @Override

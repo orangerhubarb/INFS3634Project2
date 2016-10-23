@@ -48,8 +48,9 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
         setContentView(R.layout.activity_tutorials);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Classes");
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         currentTutorialID = (int) getIntent().getSerializableExtra("TutorialID");
 
