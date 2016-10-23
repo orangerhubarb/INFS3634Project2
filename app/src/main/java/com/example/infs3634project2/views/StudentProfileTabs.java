@@ -1,12 +1,14 @@
 package com.example.infs3634project2.views;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -46,7 +48,7 @@ public class StudentProfileTabs extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private Button editStudentButton;
+    private FloatingActionButton editStudentButton;
 
     private int studentID;
     private int tutorialID;
@@ -93,7 +95,7 @@ public class StudentProfileTabs extends AppCompatActivity {
         student = studentsContract.getStudent(studentID);
         Log.d("STUDENTIDPASSED", String.valueOf(studentID));
 
-        editStudentButton = (Button) findViewById(R.id.editStudentButton);
+        editStudentButton = (FloatingActionButton) findViewById(R.id.editStudentButton);
         editStudentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +134,7 @@ public class StudentProfileTabs extends AppCompatActivity {
 
         takePhoto = (ImageButton) findViewById(R.id.takephotoImageButton);
         takePhoto.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
 

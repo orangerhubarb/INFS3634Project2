@@ -4,35 +4,61 @@
     android:layout_height="match_parent"
     tools:context="com.example.infs3634project2.views.FragmentThree">
 
-    <TextView
-        android:id="@+id/todoList"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Todo List"
-        android:textSize="40dp"
-        android:textStyle="bold" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/todoRecyclerView"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:layout_below="@+id/todoList"
-        android:paddingBottom="100dp"/>
+        android:layout_centerInParent="true">
 
-    <EditText
-        android:id="@+id/newTodoEntry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Add new to-do item"
-        android:layout_alignParentBottom="true"/>
+        <ImageView
+            android:id="@+id/ic_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_todo"
+            android:tint="@color/colorPrimary" />
 
-    <Button
-        android:id="@+id/todoEntryButton"
-        android:text="Add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/newTodoEntry"/>
+        <TextView
+            android:id="@+id/todoList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ic_todo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Todo List"
+            android:textColor="@color/colorPrimary"
+            android:textSize="40dp"
+            android:textStyle="bold" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/todoRecyclerView"
+            android:layout_width="600dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/todoList"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="100dp"
+            android:scrollbars="vertical" />
+
+        <EditText
+            android:id="@+id/newTodoEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_alignParentBottom="true"
+            android:hint="Add new to-do item" />
+
+        <Button
+            android:id="@+id/todoEntryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/newTodoEntry"
+            android:background="@color/colorAccent"
+            android:text="Add"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
 </RelativeLayout>

@@ -29,6 +29,8 @@ import com.example.infs3634project2.storage.TutorialsContract;
 
 import java.util.ArrayList;
 
+import static android.view.View.VISIBLE;
+
 public class TutorialsActivity extends AppCompatActivity implements StudentListFragment.OnFragmentInteractionListener{
 
     //The only way to get to the list of tutorials/students has to be through a button otherwise the list doesn't refresh
@@ -66,6 +68,10 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
         });
 
         Button newStudentButton = (Button) findViewById(R.id.newStudentButton);
+        if(currentTutorialID != 0) {
+            newStudentButton.setVisibility(VISIBLE);
+        }
+
         newStudentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

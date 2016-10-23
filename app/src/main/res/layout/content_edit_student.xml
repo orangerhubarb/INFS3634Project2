@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -12,197 +12,238 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.infs3634project2.views.EditStudent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/firstNameTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/firstNameEditText"
-                android:hint="First Name"
-                android:maxLines="1"
-                android:maxLength="30"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/lastNameTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/firstNameTextInput"
-            android:layout_marginBottom="20dp">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lastNameEditText"
-                android:hint="Last Name"
-                android:maxLines="1"
-                android:maxLength="30" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/zIDTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lastNameTextInput"
-            android:layout_marginBottom="20dp">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/zIDEditText"
-                android:hint="zID"
-                android:maxLines="1"
-                android:maxLength="8" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Year of Degree"
-            android:layout_below="@id/zIDTextInput"
-            android:id="@+id/yearOfDegreeLabel"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/yearOfDegreeSpinnerEdit"
-            android:layout_below="@id/yearOfDegreeLabel">
-        </Spinner>
-
-
-
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/degreeTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/yearOfDegreeSpinnerEdit"
-            android:layout_marginBottom="20dp">
-
-
-            <EditText
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/degreeEditText"
-                android:hint="Degree"
-                android:maxLines="1"
-                android:maxLength="70" />
+                android:src="@android:drawable/ic_menu_edit"
+                android:tint="@color/colorPrimary" />
 
-
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/githubUserTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/degreeTextInput"
-            android:layout_marginBottom="20dp">
-
-
-            <EditText
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/githubUserEditText"
-                android:hint="Github Username"
-                android:maxLines="1"
-                android:maxLength="30" />
+                android:layout_marginBottom="15dp"
+                android:text="Edit your Student Details!"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/strengthsTextInput"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/githubUserTextInput"
-            android:layout_marginBottom="20dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:padding="30dp"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/firstNameTextInput"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <EditText
+                        android:id="@+id/firstNameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:maxLength="30"
+                        android:maxLines="1" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lastNameTextInput"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/firstNameTextInput"
+                    android:layout_marginBottom="20dp">
 
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/strengthsEditText"
-                android:hint="Strengths"
-                android:maxLines="50"
-                android:maxLength="600" />
+                    <EditText
+                        android:id="@+id/lastNameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:maxLength="30"
+                        android:maxLines="1" />
 
 
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/weaknessesTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/strengthsTextInput"
-            android:layout_marginBottom="20dp">
+                </android.support.design.widget.TextInputLayout>
 
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/weaknessesEditText"
-                android:hint="Weaknesses"
-                android:maxLines="50"
-                android:maxLength="600" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/phonenumberTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/weaknessesTextInput"
-            android:layout_marginBottom="20dp">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/zIDTextInput"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lastNameTextInput"
+                    android:layout_marginBottom="20dp">
 
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/phonenumberEditText"
-                android:hint="Phone Number"
-                android:maxLines="1"
-                android:maxLength="12" />
+                    <EditText
+                        android:id="@+id/zIDEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="zID"
+                        android:maxLength="8"
+                        android:maxLines="1" />
 
 
-        </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/emailTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/phonenumberTextInput"
-            android:layout_marginBottom="20dp">
-
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/emailEditText"
-                android:hint="E-Mail"
-                android:maxLines="1"
-                android:maxLength="50" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/degreeTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/zIDTextInput"
+                    android:layout_marginBottom="20dp">
 
 
-        </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/degreeEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Degree"
+                        android:maxLength="70"
+                        android:maxLines="2" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/confirmStudentSaveButton"
-            android:text="Save Changes"
-            android:layout_below="@+id/emailTextInput"/>
-    </RelativeLayout>
+                </android.support.design.widget.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/yearOfDegreeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/degreeTextInput"
+                    android:text="Year of Degree" />
+
+                <Spinner
+                    android:id="@+id/yearOfDegreeSpinnerEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/yearOfDegreeLabel"></Spinner>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/phonenumberTextInput"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/yearOfDegreeSpinnerEdit"
+                    android:layout_marginBottom="20dp">
+
+
+                    <EditText
+                        android:id="@+id/phonenumberEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone Number"
+                        android:maxLength="12"
+                        android:maxLines="1" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/emailTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/phonenumberTextInput"
+                    android:layout_marginBottom="20dp">
+
+
+                    <EditText
+                        android:id="@+id/emailEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        android:maxLength="50"
+                        android:maxLines="1" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/githubUserTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <EditText
+                        android:id="@+id/githubUserEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Github Username"
+                        android:maxLength="30"
+                        android:maxLines="1" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/strengthsTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/githubUserTextInput"
+                    android:layout_marginBottom="20dp">
+
+                    <EditText
+                        android:id="@+id/strengthsEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Strengths"
+                        android:maxLength="600"
+                        android:maxLines="50" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/weaknessesTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/strengthsTextInput"
+                    android:layout_marginBottom="20dp">
+
+                    <EditText
+                        android:id="@+id/weaknessesEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Weaknesses"
+                        android:maxLength="600"
+                        android:maxLines="50" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/confirmStudentSaveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="Save Updated Details"
+                    android:background="@color/colorAccent"
+                    android:textColor="@color/white"
+                    android:padding="5dp"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </ScrollView>
