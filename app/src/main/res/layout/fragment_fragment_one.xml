@@ -19,7 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/ic_basic_info"
                 android:tint="@color/colorPrimary"
                 android:layout_marginRight="5dp"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ic_basic_info"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:text="Basic Info"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40dp"
@@ -48,7 +48,7 @@
             android:layout_below="@id/basicSkillsTitle"
             android:text="zID"
             android:textSize="24dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/zIDTextView"
@@ -65,7 +65,7 @@
             android:layout_marginTop="10dp"
             android:text="Degree"
             android:textSize="24dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/degreeTextView"
@@ -83,7 +83,7 @@
             android:layout_marginTop="10dp"
             android:text="Year of Degree"
             android:textSize="24dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
 
         <TextView
@@ -102,7 +102,7 @@
             android:layout_marginTop="10dp"
             android:text="Phone Number"
             android:textSize="24dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/phoneNumberTextView"
@@ -120,7 +120,7 @@
             android:layout_marginTop="10dp"
             android:text="Email"
             android:textSize="24dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/emailTextView"

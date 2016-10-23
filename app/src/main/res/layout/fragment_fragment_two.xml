@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/ic_skills"
                 android:tint="@color/colorPrimary"
                 android:layout_marginRight="5dp"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ic_skills"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:text="Student Skills"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40dp"
@@ -50,7 +50,7 @@
             android:layout_marginTop="10dp"
             android:text="Strengths"
             android:textSize="24dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/strengthsTextView"
@@ -69,7 +69,7 @@
             android:layout_marginTop="10dp"
             android:text="Weaknesses"
             android:textSize="24dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
 
         <TextView
@@ -89,7 +89,7 @@
             android:layout_marginTop="10dp"
             android:text="GitHub Projects"
             android:textSize="24dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/usernameLabel"
