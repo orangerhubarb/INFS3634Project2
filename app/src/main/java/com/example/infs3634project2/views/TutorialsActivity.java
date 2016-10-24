@@ -57,6 +57,7 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
 
 
         currentTutorialID = (int) getIntent().getSerializableExtra("TutorialID");
+        Log.d("CURRENTTUTID", String.valueOf(currentTutorialID));
         studentListTitle = (TextView) findViewById(R.id.studentListHeader);
 
         Button newTutorialButton = (Button) findViewById(R.id.newTutorialButton);

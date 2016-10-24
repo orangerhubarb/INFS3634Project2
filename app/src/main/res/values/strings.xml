@@ -45,5 +45,6 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+    <string name="title_activity_edit_tutorial">EditTutorial</string>
 
 </resources>

@@ -31,8 +31,6 @@ public class NewTutorial extends AppCompatActivity {
     private Spinner classAMPMStartSpinner;
     private Spinner classAMPMEndSpinner;
 
-    private EditText tutorialTime;
-
     private ImageButton backButton;
 
     private TextInputLayout tutorialNameError;

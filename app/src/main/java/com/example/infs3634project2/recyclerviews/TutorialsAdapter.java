@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.example.infs3634project2.model.Student;
 import com.example.infs3634project2.model.Tutorial;
 import com.example.infs3634project2.storage.DBOpenHelper;
 import com.example.infs3634project2.storage.StudentsContract;
+import com.example.infs3634project2.views.EditTutorial;
 import com.example.infs3634project2.views.StudentsActivity;
 import com.example.infs3634project2.views.TutorialsActivity;
 
@@ -64,6 +66,7 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
         private TextView tutorialDay;
         private TextView tutorialStudentCount;
         private TextView tutorialTime;
+        private ImageButton editTutorial;
 
         private Tutorial tutorialItem;
 
@@ -73,6 +76,22 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
             tutorialDay = (TextView) itemView.findViewById(R.id.tutorial_day);
             tutorialTime = (TextView) itemView.findViewById(R.id.tutorial_time);
             tutorialStudentCount = (TextView) itemView.findViewById(R.id.tutorial_student_count);
+            editTutorial = (ImageButton) itemView.findViewById(R.id.editTutorialButton);
+            editTutorial.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent editTutorial = new Intent(v.getContext(), EditTutorial.class);
+                    editTutorial.putExtra("TutorialName", tutorialItem.getName());
+                    editTutorial.putExtra("TutorialTime", tutorialItem.getTime());
+                    editTutorial.putExtra("TutorialDay", tutorialItem.getDay());
+                    Log.d("TutorialTime", tutorialItem.getTime());
+
+                    editTutorial.putExtra("TutorialID", tutorialItem.getTutorialID());
+
+                    v.getContext().startActivity(editTutorial);
+
+                }
+            });
 
             itemView.setOnClickListener(this);
         }

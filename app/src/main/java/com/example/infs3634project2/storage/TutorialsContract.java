@@ -23,7 +23,7 @@ public class TutorialsContract {
 
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    TutorialEntry._ID + " INTEGER PRIMARY KEY," +
+                    TutorialEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                     TutorialEntry.COLUMN_NAME + " TEXT," +
                     TutorialEntry.COLUMN_TIME + " TEXT," +
                     TutorialEntry.COLUMN_DAY + " TEXT" + ")";
@@ -52,6 +52,7 @@ public class TutorialsContract {
 
         long newRowId;
         newRowId = db.insert(TABLE_NAME, null, values);
+
         db.close();
         Log.d("Inserted Row", Long.toString(newRowId));
         return newRowId;
@@ -107,6 +108,28 @@ public class TutorialsContract {
         cur.close();
         db.close();
         return tutorialsList;
+    }
+
+    public void deleteTutorial(int tutorialID) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        db.delete(TABLE_NAME, "_id = " + tutorialID, null);
+        db.delete("students", "tutorial = " + tutorialID, null);
+        db.close();
+    }
+
+    public void updateTutorial(Tutorial tutorial, int tutorialID) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(TutorialEntry.COLUMN_NAME, tutorial.getName());
+        values.put(TutorialEntry.COLUMN_TIME, tutorial.getTime());
+        values.put(TutorialEntry.COLUMN_DAY, tutorial.getDay());
+
+        String selection = StudentsContract.StudentEntry._ID + " =" + tutorialID;
+
+        db.update(TABLE_NAME, values, selection, null);
+        db.close();
     }
 
 
