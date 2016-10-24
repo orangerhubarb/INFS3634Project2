@@ -9,4 +9,8 @@
     <color name="primary_inverse_text">#ffffff</color>
     <color name="secondary_text_inverse">#ffffff</color>
     <color name="delete_colour">#FF0000</color>
+
+    <drawable name="itemPressed">#00BCD4</drawable>
+    <drawable name="itemSelected">#0097A7</drawable>
+
 </resources>

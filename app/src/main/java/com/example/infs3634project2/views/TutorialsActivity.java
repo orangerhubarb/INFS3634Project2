@@ -44,7 +44,6 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
     private int currentTutorialID;
     private RecyclerView getmRecyclerViewStudents;
     private EditText studentsSearch;
-    private TextView studentListTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,6 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
 
         currentTutorialID = (int) getIntent().getSerializableExtra("TutorialID");
         Log.d("CURRENTTUTID", String.valueOf(currentTutorialID));
-        studentListTitle = (TextView) findViewById(R.id.studentListHeader);
 
         Button newTutorialButton = (Button) findViewById(R.id.newTutorialButton);
         assert newTutorialButton != null;
@@ -134,20 +132,19 @@ public class TutorialsActivity extends AppCompatActivity implements StudentListF
 
     }
 
-    public void setStudentListTitle(String name) {
-        studentListTitle.setText("Student list for " + name);
-    }
 
     @Override
     public void onResume() {
         super.onResume();
+        int backTutorialID = (int) getIntent().getSerializableExtra("TutorialID");
+        Log.d("BackID", String.valueOf(backTutorialID));
         DBOpenHelper dbOpenHelper = new DBOpenHelper(this);
         TutorialsContract tutorialsContract = new TutorialsContract(dbOpenHelper);
 
         tutorialsList = tutorialsContract.getTutorials();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.tutorialsRecylerView);
-        mAdapter = new TutorialsAdapter(tutorialsList, this);
+        mAdapter = new TutorialsAdapter(tutorialsList, this, backTutorialID);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 

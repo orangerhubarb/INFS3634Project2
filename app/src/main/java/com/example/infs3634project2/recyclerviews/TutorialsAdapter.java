@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,17 +33,25 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
 
     private ArrayList<Tutorial> mTutorial;
     public TutorialsActivity tutorialsActivity;
+    private SparseBooleanArray selectedItems = new SparseBooleanArray();
+    private int selectedPos = -1;
+    private int backTutorialID;
 
     public TutorialsAdapter(ArrayList<Tutorial> tutorialList, TutorialsActivity tutorialsActivity) {
         this.mTutorial = tutorialList;
         this.tutorialsActivity = tutorialsActivity;
     }
 
+    public TutorialsAdapter(ArrayList<Tutorial> tutorialList, TutorialsActivity tutorialsActivity, int backTutorialID) {
+        this.mTutorial = tutorialList;
+        this.tutorialsActivity = tutorialsActivity;
+        this.backTutorialID = backTutorialID;
+    }
+
     @Override
     public TutorialsAdapter.TutorialsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflatedView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.tutorials_item_row, parent, false);
-
         return new TutorialsHolder(inflatedView);
     }
 
@@ -52,7 +61,13 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
         if (itemTutorial.getStudents() != null) {
             Log.d("Debug", itemTutorial.getStudents().toString());
         }
+        if (itemTutorial.getTutorialID() == backTutorialID && backTutorialID != -1) {
+            selectedPos = position;
+        }
+        holder.itemView.setSelected(selectedPos == position);
         holder.bindTutorial(itemTutorial);
+
+        Log.d("ITEMS", selectedItems.toString());
     }
 
     @Override
@@ -72,12 +87,17 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
 
         public TutorialsHolder(View itemView) {
             super(itemView);
+
+            itemView.setSelected(false);
+
             tutorialName = (TextView) itemView.findViewById(R.id.tutorial_name);
             tutorialDay = (TextView) itemView.findViewById(R.id.tutorial_day);
             tutorialTime = (TextView) itemView.findViewById(R.id.tutorial_time);
             tutorialStudentCount = (TextView) itemView.findViewById(R.id.tutorial_student_count);
             editTutorial = (ImageButton) itemView.findViewById(R.id.editTutorialButton);
+
             editTutorial.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
                     Intent editTutorial = new Intent(v.getContext(), EditTutorial.class);
@@ -107,18 +127,31 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
         @Override
         public void onClick(View v) {
             Context context = v.getContext();
+            notifyItemChanged(selectedPos);
+            selectedPos = getLayoutPosition();
+            notifyItemChanged(selectedPos);
+            backTutorialID = -1;
 
             DBOpenHelper dbOpenHelper = new DBOpenHelper(context);
             StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
+
+//            if (selectedItems.get(getAdapterPosition(), false)) {
+//                selectedItems.delete(getAdapterPosition());
+//                itemView.setSelected(false);
+//            }
+//            else {
+//                selectedItems.put(getAdapterPosition(), true);
+//                itemView.setSelected(true);
+//            }
 
             if (studentsContract.getStudentsList(tutorialItem.getTutorialID()) != null) {
                 Log.d("TutAdapt tutID", String.valueOf(tutorialItem.getTutorialID()));
                 tutorialsActivity.updateFragmentList(tutorialItem.getTutorialID());
             }
-            tutorialsActivity.setStudentListTitle(tutorialItem.getName());
 
             Button newStudentButton = (Button) tutorialsActivity.findViewById(R.id.newStudentButton);
             newStudentButton.setVisibility(VISIBLE);
         }
+
     }
 }
