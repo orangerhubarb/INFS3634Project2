@@ -135,14 +135,6 @@ public class TutorialsAdapter extends RecyclerView.Adapter<TutorialsAdapter.Tuto
             DBOpenHelper dbOpenHelper = new DBOpenHelper(context);
             StudentsContract studentsContract = new StudentsContract(dbOpenHelper);
 
-//            if (selectedItems.get(getAdapterPosition(), false)) {
-//                selectedItems.delete(getAdapterPosition());
-//                itemView.setSelected(false);
-//            }
-//            else {
-//                selectedItems.put(getAdapterPosition(), true);
-//                itemView.setSelected(true);
-//            }
 
             if (studentsContract.getStudentsList(tutorialItem.getTutorialID()) != null) {
                 Log.d("TutAdapt tutID", String.valueOf(tutorialItem.getTutorialID()));
